@@ -1,0 +1,88 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #222034;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+}
+
+#content img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+canvas {
+    border: 8px solid #fffcbc;
+    border-radius: 12px;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1),
+        0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #222034;
+
+    image-rendering: pixelated;
+
+    height: 90vh;
+    aspect-ratio: 500/ 375;
+    max-height: 90vh;
+    max-width: calc(90vh * (500 / 375));
+}
+
+#startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    background-color: #fffbcb;
+    color: #333;
+    border: none;
+
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: all 0.3s ease;
+}
+
+#startButton:hover {
+    background-color: #fff6b6;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+#startButton:active {
+    transform: translate(-50%, -50%) scale(0.98);
+}
