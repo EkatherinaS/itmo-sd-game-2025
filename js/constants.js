@@ -6,7 +6,8 @@ export const ENEMY_HEIGHT = 35;
 
 export const PLAYER_WIDTH = 35;
 export const PLAYER_HEIGHT = 35;
-export const PLAYER_LIVES = 3;
+
+export const STEP = 10;
 
 export const W_CODE = 87;
 export const A_CODE = 65;

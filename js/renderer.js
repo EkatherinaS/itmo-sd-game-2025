@@ -1,8 +1,9 @@
 import * as CONST from "./constants.js"
 
 export class Renderer {
-    constructor(ctx) {
+    constructor(ctx, entityManager) {
         this.ctx = ctx;
+        this.entityManager = entityManager;
         this.images = {};
 
         CONST.IMAGES.forEach(name => {
@@ -12,8 +13,9 @@ export class Renderer {
         });
     }
 
-    renderAll(entities) {
+    renderAll() {
         this.ctx.clearRect(0, 0, CONST.GAME_WIDTH, CONST.GAME_HEIGHT);
+        const entities = this.entityManager.getAllEntities();
         entities.forEach(entity => {
             const img = this.images[entity.sprite];
             if (img) {

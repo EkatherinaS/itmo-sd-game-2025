@@ -5,25 +5,22 @@ import { Controller } from "./controller.js";
 
 
 class Game {
-    constructor(element) {
-        element.appendChild(canvas);
+    constructor(canvas) {
         const ctx = canvas.getContext('2d');
-        this.loop = this.loop.bind(this);
+        const entityManager = new EntityManager();
 
-        this.entityManager = new EntityManager();
-        this.renderer = new Renderer(ctx);
-        this.controller = new Controller();
+        this.loop = this.loop.bind(this);
+        this.renderer = new Renderer(ctx, entityManager);
+        this.controller = new Controller(entityManager);
     }
 
     start() {
-        const player = this.entityManager.getPlayer();
-        this.controller.setEventListeners(player);
+        this.controller.setEventListeners();
         this.loop();
     }
 
     loop() {
-        const entities = this.entityManager.getAllEntities();
-        this.renderer.renderAll(entities);
+        this.renderer.renderAll();
         requestAnimationFrame(this.loop);
     }
 }
@@ -44,4 +41,4 @@ const canvas = document.getElementById("gameCanvas");
 canvas.width = CONST.GAME_WIDTH;
 canvas.height = CONST.GAME_HEIGHT;
 
-const game = new Game(document.getElementById('game'));
+const game = new Game(canvas);
