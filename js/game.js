@@ -2,34 +2,35 @@ import * as CONST from "./constants.js"
 import { Renderer } from "./renderer.js"
 import { EntityManager } from "./entityManager.js";
 import { Controller } from "./controller.js";
-import { ImageLoader } from "./imageLoader.js";
 
 
 class Game {
     constructor(element) {
         element.appendChild(canvas);
-        this.ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
         this.loop = this.loop.bind(this);
 
         this.entityManager = new EntityManager();
-        this.renderer = new Renderer(this.ctx, this.entityManager);
-        this.controller = new Controller(this.entityManager);
-        this.loader = new ImageLoader();
+        this.renderer = new Renderer(ctx);
+        this.controller = new Controller();
     }
 
     start() {
+        const player = this.entityManager.getPlayer();
+        this.controller.setEventListeners(player);
         this.loop();
     }
 
     loop() {
-        this.renderer.renderAll();
+        const entities = this.entityManager.getAllEntities();
+        this.renderer.renderAll(entities);
         requestAnimationFrame(this.loop);
     }
 }
 
 function startGame() {
-    audioPlayer.play();
     startBtn.hidden = true;
+    audioPlayer.play();
     game.start();
 }
 

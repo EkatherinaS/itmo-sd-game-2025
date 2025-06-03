@@ -8,5 +8,4 @@ export class Entity {
         this.width = width;
         this.height = height;
     }
-
 }

@@ -1,18 +1,23 @@
 import * as CONST from "./constants.js"
 
 export class Renderer {
-    constructor(ctx, entityManager) {
+    constructor(ctx) {
         this.ctx = ctx;
-        this.entityManager = entityManager;
+        this.images = {};
+
+        CONST.IMAGES.forEach(name => {
+            const img = new Image();
+            img.src = `images/${name}`;
+            this.images[name] = img;
+        });
     }
 
-    renderAll() {
+    renderAll(entities) {
         this.ctx.clearRect(0, 0, CONST.GAME_WIDTH, CONST.GAME_HEIGHT);
-
-        const entitites = this.entityManager.getAllEntities();
-        entitites.forEach(entity => {
-            if (entity.sprite) {
-                this.ctx.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height);
+        entities.forEach(entity => {
+            const img = this.images[entity.sprite];
+            if (img) {
+                this.ctx.drawImage(img, entity.x, entity.y, entity.width, entity.height);
             }
         });
     }

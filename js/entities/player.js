@@ -1,14 +1,12 @@
-import { Entity } from "./entity.js"
-import * as CONST from "./constants.js"
-import { ImageLoader } from "./imageLoader.js";
+import { Actor } from "./actor.js";
+import * as CONST from "../constants.js"
 
-export class Player extends Entity {
+export class Player extends Actor {
 
     constructor() {
-        const loader = new ImageLoader();
         const x = Math.floor(CONST.GAME_WIDTH / CONST.PLAYER_WIDTH / 2) * CONST.PLAYER_WIDTH;
         const y = Math.floor(CONST.GAME_HEIGHT / CONST.PLAYER_HEIGHT / 2) * CONST.PLAYER_HEIGHT;
-        const sprite = loader.get('lumen.svg');
+        const sprite = 'lumen.svg';
         super(sprite, x, y, CONST.PLAYER_WIDTH, CONST.PLAYER_HEIGHT);
     }
 
