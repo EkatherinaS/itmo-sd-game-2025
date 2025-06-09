@@ -24,10 +24,10 @@ export class Controller {
         this.commands["right"] = commandFactory.createCmdMoveRight();
 
         document.addEventListener('keydown', e => {
-            if (e.keyCode === CONST.W_CODE) this.commands["up"].invoke();
-            else if (e.keyCode === CONST.S_CODE) this.commands["down"].invoke();
-            else if (e.keyCode === CONST.A_CODE) this.commands["left"].invoke();
-            else if (e.keyCode === CONST.D_CODE) this.commands["right"].invoke();
+            if (CONST.KEY_UP.includes(e.key)) this.commands.up?.invoke();
+            else if (CONST.KEY_DOWN.includes(e.key)) this.commands.down?.invoke();
+            else if (CONST.KEY_LEFT.includes(e.key)) this.commands.left?.invoke();
+            else if (CONST.KEY_RIGHT.includes(e.key)) this.commands.right?.invoke();
         });
     }
 }

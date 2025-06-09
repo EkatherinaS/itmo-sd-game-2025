@@ -13,7 +13,7 @@ export class Player extends Actor {
     }
 
     getNextFrame() {
-        this.frame = (this.frame + 1) % 3;
+        this.frame = (this.frame + 1) % 4;
         return this.frame;
     }
 }

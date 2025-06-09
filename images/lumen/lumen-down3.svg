@@ -37,10 +37,10 @@
 <rect x="3" y="4" width="1" height="1" fill="#FDEBB2" opacity="0.054902" />
 <rect x="4" y="4" width="1" height="1" fill="#FDEBB3" opacity="0.117647" />
 <rect x="5" y="4" width="1" height="1" fill="#FDECB6" opacity="0.188235" />
-<rect x="6" y="4" width="1" height="1" fill="#FEFEFC" />
-<rect x="7" y="4" width="1" height="1" fill="#FEFEFC" />
-<rect x="8" y="4" width="1" height="1" fill="#FEFEFC" />
-<rect x="9" y="4" width="1" height="1" fill="#FDEFBD" opacity="0.309804" />
+<rect x="6" y="4" width="1" height="1" fill="#FDEDB9" opacity="0.258824" />
+<rect x="7" y="4" width="1" height="1" fill="#FDEEBC" opacity="0.309804" />
+<rect x="8" y="4" width="1" height="1" fill="#FDEFBE" opacity="0.329412" />
+<rect x="9" y="4" width="1" height="1" fill="#FEFEFC" />
 <rect x="10" y="4" width="1" height="1" fill="#FDEEBB" opacity="0.254902" />
 <rect x="11" y="4" width="1" height="1" fill="#FDEDB8" opacity="0.172549" />
 <rect x="12" y="4" width="1" height="1" fill="#FDECB6" opacity="0.094118" />
@@ -78,13 +78,13 @@
 <rect x="2" y="7" width="1" height="1" fill="#FDECB6" opacity="0.050980" />
 <rect x="3" y="7" width="1" height="1" fill="#FDEDB7" opacity="0.137255" />
 <rect x="4" y="7" width="1" height="1" fill="#FDEEBA" opacity="0.258824" />
-<rect x="5" y="7" width="1" height="1" fill="#FDEFC0" opacity="0.384314" />
+<rect x="5" y="7" width="1" height="1" fill="#FEFEFC" />
 <rect x="6" y="7" width="1" height="1" fill="#FEFEFC" />
-<rect x="7" y="7" width="1" height="1" fill="#FEFEFC" />
+<rect x="7" y="7" width="1" height="1" fill="#281410" />
 <rect x="8" y="7" width="1" height="1" fill="#FEFEFC" />
 <rect x="9" y="7" width="1" height="1" fill="#281410" />
 <rect x="10" y="7" width="1" height="1" fill="#FEFEFC" />
-<rect x="11" y="7" width="1" height="1" fill="#FDF2C5" opacity="0.345098" />
+<rect x="11" y="7" width="1" height="1" fill="#FEFEFC" />
 <rect x="12" y="7" width="1" height="1" fill="#FDF1C1" opacity="0.196078" />
 <rect x="13" y="7" width="1" height="1" fill="#FDF0C0" opacity="0.078431" />
 <rect x="14" y="7" width="1" height="1" fill="#FDF0BE" opacity="0.015686" />
@@ -92,13 +92,13 @@
 <rect x="2" y="8" width="1" height="1" fill="#FDECB6" opacity="0.050980" />
 <rect x="3" y="8" width="1" height="1" fill="#FDEDB7" opacity="0.137255" />
 <rect x="4" y="8" width="1" height="1" fill="#FDEEBB" opacity="0.254902" />
-<rect x="5" y="8" width="1" height="1" fill="#FDEFC0" opacity="0.384314" />
+<rect x="5" y="8" width="1" height="1" fill="#FEFEFC" />
 <rect x="6" y="8" width="1" height="1" fill="#FEFEFC" />
-<rect x="7" y="8" width="1" height="1" fill="#FEFEFC" />
+<rect x="7" y="8" width="1" height="1" fill="#281410" />
 <rect x="8" y="8" width="1" height="1" fill="#FEFEFC" />
 <rect x="9" y="8" width="1" height="1" fill="#281410" />
 <rect x="10" y="8" width="1" height="1" fill="#FEFEFC" />
-<rect x="11" y="8" width="1" height="1" fill="#FDF1C4" opacity="0.352941" />
+<rect x="11" y="8" width="1" height="1" fill="#FEFEFC" />
 <rect x="12" y="8" width="1" height="1" fill="#FDF0C0" opacity="0.200000" />
 <rect x="13" y="8" width="1" height="1" fill="#FDF0BF" opacity="0.078431" />
 <rect x="14" y="8" width="1" height="1" fill="#FDF0BE" opacity="0.019608" />
@@ -107,7 +107,7 @@
 <rect x="3" y="9" width="1" height="1" fill="#FDECB6" opacity="0.117647" />
 <rect x="4" y="9" width="1" height="1" fill="#FDEDB9" opacity="0.227451" />
 <rect x="5" y="9" width="1" height="1" fill="#FDEFBE" opacity="0.349020" />
-<rect x="6" y="9" width="1" height="1" fill="#FBF9CF" />
+<rect x="6" y="9" width="1" height="1" fill="#FEFEFC" />
 <rect x="7" y="9" width="1" height="1" fill="#FEFEFC" />
 <rect x="8" y="9" width="1" height="1" fill="#FEFEFC" />
 <rect x="9" y="9" width="1" height="1" fill="#FEFEFC" />
@@ -121,7 +121,7 @@
 <rect x="4" y="10" width="1" height="1" fill="#FDECB6" opacity="0.180392" />
 <rect x="5" y="10" width="1" height="1" fill="#FDEDBA" opacity="0.282353" />
 <rect x="6" y="10" width="1" height="1" fill="#FDEFBF" opacity="0.376471" />
-<rect x="7" y="10" width="1" height="1" fill="#FBF9CF" />
+<rect x="7" y="10" width="1" height="1" fill="#FEFEFC" />
 <rect x="8" y="10" width="1" height="1" fill="#FBF9CF" />
 <rect x="9" y="10" width="1" height="1" fill="#FBF9CF" />
 <rect x="10" y="10" width="1" height="1" fill="#FDEFBF" opacity="0.380392" />

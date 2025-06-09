@@ -15,29 +15,26 @@ export class CmdMove extends Command {
         const y = this.player.y + Math.ceil((CONST.LIGHT_HEIGHT - CONST.PLAYER_HEIGHT) / 2);
 
         const frame = this.player.getNextFrame();
+        this.player.sprite = CONST.PLAYER_SPRITES[this.direction][frame];
 
         if (this.direction === CONST.MOVE_LEFT && x > 0 &&
             !this.positionLookup.getPositionInfo(x - CONST.STEP, y).blocked &&
             !this.positionLookup.getPositionInfo(x - CONST.STEP, y + CONST.PLAYER_HEIGHT).blocked) {
-            this.player.sprite = CONST.PLAYER_SPRITES[CONST.MOVE_LEFT][frame];
             this.player.x -= CONST.STEP;
         }
         if (this.direction === CONST.MOVE_RIGHT && x < CONST.GAME_WIDTH - CONST.PLAYER_WIDTH &&
             !this.positionLookup.getPositionInfo(x + CONST.PLAYER_WIDTH + CONST.STEP, y).blocked &&
             !this.positionLookup.getPositionInfo(x + CONST.PLAYER_WIDTH + CONST.STEP, y + CONST.PLAYER_HEIGHT).blocked) {
-            this.player.sprite = CONST.PLAYER_SPRITES[CONST.MOVE_RIGHT][frame];
             this.player.x += CONST.STEP;
         }
         if (this.direction === CONST.MOVE_UP && y > 0 &&
             !this.positionLookup.getPositionInfo(x, y - CONST.STEP).blocked &&
             !this.positionLookup.getPositionInfo(x + CONST.PLAYER_WIDTH, y - CONST.STEP).blocked) {
-            this.player.sprite = CONST.PLAYER_SPRITES[CONST.MOVE_UP][frame];
             this.player.y -= CONST.STEP;
         }
         if (this.direction === CONST.MOVE_DOWN && y < CONST.GAME_HEIGHT - CONST.PLAYER_HEIGHT &&
             !this.positionLookup.getPositionInfo(x, y + CONST.STEP + CONST.PLAYER_HEIGHT).blocked &&
             !this.positionLookup.getPositionInfo(x + CONST.PLAYER_WIDTH, y + CONST.STEP + CONST.PLAYER_HEIGHT).blocked) {
-            this.player.sprite = CONST.PLAYER_SPRITES[CONST.MOVE_DOWN][frame];
             this.player.y += CONST.STEP;
         }
     }
