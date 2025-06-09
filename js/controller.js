@@ -3,17 +3,26 @@ import { CommandFactory } from "./commands/commandFactory.js";
 
 export class Controller {
 
-    constructor(entityManager) {
-        this.commandFactory = new CommandFactory(entityManager);
+    constructor() {
         this.commands = {
-            "up": this.commandFactory.createCmdMoveUp(),
-            "down": this.commandFactory.createCmdMoveDown(),
-            "left": this.commandFactory.createCmdMoveLeft(),
-            "right": this.commandFactory.createCmdMoveRight()
+            "use": null,
+            "changeActive": null,
+            "up": null,
+            "down": null,
+            "left": null,
+            "right": null,
+            "attack": null
         };
     }
 
-    setEventListeners() {
+    setEventListeners(entityManager, positionLookup) {
+        const commandFactory = new CommandFactory(entityManager, positionLookup);
+
+        this.commands["up"] = commandFactory.createCmdMoveUp();
+        this.commands["down"] = commandFactory.createCmdMoveDown();
+        this.commands["left"] = commandFactory.createCmdMoveLeft();
+        this.commands["right"] = commandFactory.createCmdMoveRight();
+
         document.addEventListener('keydown', e => {
             if (e.keyCode === CONST.W_CODE) this.commands["up"].invoke();
             else if (e.keyCode === CONST.S_CODE) this.commands["down"].invoke();

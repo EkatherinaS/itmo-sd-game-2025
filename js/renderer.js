@@ -13,13 +13,21 @@ export class Renderer {
         });
     }
 
-    renderAll() {
-        this.ctx.clearRect(0, 0, CONST.GAME_WIDTH, CONST.GAME_HEIGHT);
-        const entities = this.entityManager.getAllEntities();
+    renderEntities(entities) {
+        this.ctx.clearRect(0, 0, CONST.GAME_WIDTH * CONST.PIXEL_SIZE, CONST.GAME_HEIGHT * CONST.PIXEL_SIZE);
         entities.forEach(entity => {
             const img = this.images[entity.sprite];
             if (img) {
-                this.ctx.drawImage(img, entity.x, entity.y, entity.width, entity.height);
+                this.ctx.drawImage(img, entity.x * CONST.PIXEL_SIZE, entity.y * CONST.PIXEL_SIZE, entity.width * CONST.PIXEL_SIZE, entity.height * CONST.PIXEL_SIZE);
+            }
+        });
+    }
+
+    renderMap(map) {
+        map.forEach(entity => {
+            const img = this.images[entity.sprite];
+            if (img) {
+                this.ctx.drawImage(img, entity.x * CONST.PIXEL_SIZE, entity.y * CONST.PIXEL_SIZE, entity.width * CONST.PIXEL_SIZE, entity.height * CONST.PIXEL_SIZE);
             }
         });
     }

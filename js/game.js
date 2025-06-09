@@ -2,25 +2,31 @@ import * as CONST from "./constants.js"
 import { Renderer } from "./renderer.js"
 import { EntityManager } from "./entityManager.js";
 import { Controller } from "./controller.js";
+import { Level } from "./level/level.js";
 
 
 class Game {
     constructor(canvas) {
         const ctx = canvas.getContext('2d');
-        const entityManager = new EntityManager();
-
         this.loop = this.loop.bind(this);
-        this.renderer = new Renderer(ctx, entityManager);
-        this.controller = new Controller(entityManager);
+
+        this.level = new Level();
+        this.entityManager = new EntityManager();
+        this.renderer = new Renderer(ctx);
+        this.controller = new Controller();
     }
 
     start() {
-        this.controller.setEventListeners();
+        const positionLookup = this.level.getPositionLookup();
+        this.controller.setEventListeners(this.entityManager, positionLookup);
         this.loop();
     }
 
     loop() {
-        this.renderer.renderAll();
+        const entities = this.entityManager.getAllEntities();
+        const map = this.level.getEntities();
+        this.renderer.renderEntities(entities);
+        this.renderer.renderMap(map);
         requestAnimationFrame(this.loop);
     }
 }
@@ -38,7 +44,20 @@ const audioPlayer = document.getElementById("audioPlayer");
 audioPlayer.volume = 0.1;
 
 const canvas = document.getElementById("gameCanvas");
-canvas.width = CONST.GAME_WIDTH;
-canvas.height = CONST.GAME_HEIGHT;
+canvas.width = CONST.GAME_WIDTH * CONST.PIXEL_SIZE;
+canvas.height = CONST.GAME_HEIGHT * CONST.PIXEL_SIZE;
+const container = canvas.parentElement;
+
+function resizeCanvas() {
+    const scale = Math.min(
+        container.clientWidth / canvas.width,
+        container.clientHeight / canvas.height
+    );
+    canvas.style.width = `${canvas.width * scale}px`;
+    canvas.style.height = `${canvas.height * scale}px`;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
 const game = new Game(canvas);
