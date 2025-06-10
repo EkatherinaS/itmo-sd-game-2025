@@ -14,9 +14,6 @@ export class CmdMove extends Command {
         const x = this.player.x + Math.ceil((CONST.LIGHT_WIDTH - CONST.PLAYER_WIDTH) / 2);
         const y = this.player.y + Math.ceil((CONST.LIGHT_HEIGHT - CONST.PLAYER_HEIGHT) / 2);
 
-        const frame = this.player.getNextFrame();
-        this.player.sprite = CONST.PLAYER_SPRITES[this.direction][frame];
-
         if (this.direction === CONST.MOVE_LEFT && x > 0 &&
             !this.positionLookup.getPositionInfo(x - CONST.STEP, y).blocked &&
             !this.positionLookup.getPositionInfo(x - CONST.STEP, y + CONST.PLAYER_HEIGHT).blocked) {
@@ -37,5 +34,8 @@ export class CmdMove extends Command {
             !this.positionLookup.getPositionInfo(x + CONST.PLAYER_WIDTH, y + CONST.STEP + CONST.PLAYER_HEIGHT).blocked) {
             this.player.y += CONST.STEP;
         }
+
+        const frame = this.player.getNextFrame();
+        this.player.sprite = CONST.PLAYER_SPRITES[this.direction][frame];
     }
 }

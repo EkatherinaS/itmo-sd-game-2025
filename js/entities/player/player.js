@@ -1,5 +1,5 @@
-import { Actor } from "./actor.js";
-import * as CONST from "../constants.js"
+import { Actor } from "../actor.js";
+import * as CONST from "../../constants.js"
 
 export class Player extends Actor {
 

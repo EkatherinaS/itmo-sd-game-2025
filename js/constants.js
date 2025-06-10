@@ -15,10 +15,7 @@ export const LIGHT_HEIGHT = 16;
 export const BLOCK_WIDTH = 8;
 export const BLOCK_HEIGHT = 8;
 
-export const SOFT_BLOCK_WIDTH = 16;
-export const SOFT_BLOCK_HEIGHT = 16;
-
-export const STEP = 1;
+export const STEP = 2;
 
 export const W_CODE = 87;
 export const A_CODE = 65;
