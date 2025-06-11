@@ -3,7 +3,14 @@
 ## Running the project
 
 ```bash
-python -m http.server
+npm ci # to install dependencies
+npm start # starts localhost:8000 server
+```
+
+## Running tests
+
+```bash
+npm test
 ```
 
 ## Formatting
