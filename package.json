@@ -1,0 +1,25 @@
+{
+    "name": "itmo-sd-game-2025",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "python -m http.server",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/EkatherinaS/itmo-sd-game-2025.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/EkatherinaS/itmo-sd-game-2025/issues"
+    },
+    "homepage": "https://github.com/EkatherinaS/itmo-sd-game-2025#readme",
+    "devDependencies": {
+        "prettier": "^3.5.3"
+    }
+}

@@ -1,8 +1,5 @@
 export class Command {
-
-    constructor() {
-
-    }
+    constructor() {}
 
     //for all cuccessors should be defined invoke()
 }
