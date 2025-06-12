@@ -1,7 +1,7 @@
-import { Leech } from "./entities/enemy/leech.js";
-import { Orb } from "./entities/enemy/orb.js";
-import { Slug } from "./entities/enemy/slug.js";
-import { Player } from "./entities/player/player.js";
+import { Leech } from './entities/enemy/leech.js';
+import { Orb } from './entities/enemy/orb.js';
+import { Slug } from './entities/enemy/slug.js';
+import { Player } from './entities/player/player.js';
 
 export class EntityManager {
     constructor() {

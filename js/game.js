@@ -1,9 +1,8 @@
-import * as CONST from "./constants.js"
-import { Renderer } from "./renderer.js"
-import { EntityManager } from "./entityManager.js";
-import { Controller } from "./controller.js";
-import { Level } from "./level/level.js";
-
+import * as CONST from './constants.js';
+import { Renderer } from './renderer.js';
+import { EntityManager } from './entityManager.js';
+import { Controller } from './controller.js';
+import { Level } from './level/level.js';
 
 class Game {
     constructor(canvas) {
@@ -41,13 +40,13 @@ function startGame() {
     game.start();
 }
 
-const startBtn = document.getElementById("startButton");
+const startBtn = document.getElementById('startButton');
 startBtn.addEventListener('click', startGame);
 
-const audioPlayer = document.getElementById("audioPlayer");
+const audioPlayer = document.getElementById('audioPlayer');
 audioPlayer.volume = 0.1;
 
-const canvas = document.getElementById("gameCanvas");
+const canvas = document.getElementById('gameCanvas');
 canvas.width = CONST.GAME_WIDTH * CONST.PIXEL_SIZE;
 canvas.height = CONST.GAME_HEIGHT * CONST.PIXEL_SIZE;
 const container = canvas.parentElement;

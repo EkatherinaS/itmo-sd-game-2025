@@ -7,7 +7,7 @@ export class BaseEnemy extends Enemy {
     constructor(sprite, x, y) {
         super(sprite, x, y);
         this.state = new StateNormal();
-        this.slowCount = 8;
+        this.slowCount = 4;
     }
 
     move(positionLookup, player) {
