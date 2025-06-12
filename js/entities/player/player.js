@@ -8,12 +8,5 @@ export class Player extends Actor {
         const y = Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
         const sprite = CONST.PLAYER_SPRITES[CONST.MOVE_DOWN][0];
         super(sprite, x, y, CONST.LIGHT_HEIGHT, CONST.LIGHT_WIDTH);
-
-        this.frame = 0;
-    }
-
-    getNextFrame() {
-        this.frame = (this.frame + 1) % 4;
-        return this.frame;
     }
 }
