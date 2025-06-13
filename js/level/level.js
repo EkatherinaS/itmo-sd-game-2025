@@ -8,12 +8,12 @@ import { MapFactory } from "./mapFactory.js";
 
 export class Level {
 
-    constructor(mapType = null, filePath = null) {
+    constructor(mapType = null, filePath = null, difficulty = 1) {
         this.mapFactory = new MapFactory();
 
         switch (mapType) {
             case "random":
-                this.entities = this.mapFactory.createRandom();
+                this.entities = this.mapFactory.createRandom(difficulty);
                 break;
             case "fromJSON":
                 this.mapFactory.createFromJSON(filePath || "/itmo-sd-game-2025/levelMaps/levelTest.json")

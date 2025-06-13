@@ -11,8 +11,8 @@ class Game {
         this.loop = this.loop.bind(this);
 
         // this.level = new Level(); //тестовая заглушка
-        // this.level = new Level('random'); //ToDo
-        this.level = new Level('fromJSON', "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+        this.level = new Level('random',  null,   4);
+        // this.level = new Level('fromJSON', "/itmo-sd-game-2025/levelMaps/levelFirst.json");
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);
         this.controller = new Controller();
