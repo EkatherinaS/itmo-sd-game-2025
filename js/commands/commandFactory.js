@@ -1,9 +1,7 @@
-import * as CONST from "../constants.js"
-import { CmdMove } from "./cmdMove.js"
-
+import * as CONST from '../constants.js';
+import { CmdMove } from './cmdMove.js';
 
 export class CommandFactory {
-
     constructor(entityManager, positionLookup) {
         this.entityManager = entityManager;
         this.positionLookup = positionLookup;

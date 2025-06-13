@@ -1,4 +1,4 @@
-import * as CONST from "./constants.js"
+import * as CONST from './constants.js';
 
 export class Renderer {
     constructor(ctx, entityManager) {
@@ -14,11 +14,22 @@ export class Renderer {
     }
 
     renderEntities(entities) {
-        this.ctx.clearRect(0, 0, CONST.GAME_WIDTH * CONST.PIXEL_SIZE, CONST.GAME_HEIGHT * CONST.PIXEL_SIZE);
+        this.ctx.clearRect(
+            0,
+            0,
+            CONST.GAME_WIDTH * CONST.PIXEL_SIZE,
+            CONST.GAME_HEIGHT * CONST.PIXEL_SIZE
+        );
         entities.forEach(entity => {
             const img = this.images[entity.sprite];
             if (img) {
-                this.ctx.drawImage(img, entity.x * CONST.PIXEL_SIZE, entity.y * CONST.PIXEL_SIZE, entity.width * CONST.PIXEL_SIZE, entity.height * CONST.PIXEL_SIZE);
+                this.ctx.drawImage(
+                    img,
+                    entity.x * CONST.PIXEL_SIZE,
+                    entity.y * CONST.PIXEL_SIZE,
+                    entity.width * CONST.PIXEL_SIZE,
+                    entity.height * CONST.PIXEL_SIZE
+                );
             }
         });
     }
@@ -27,7 +38,13 @@ export class Renderer {
         map.forEach(entity => {
             const img = this.images[entity.sprite];
             if (img) {
-                this.ctx.drawImage(img, entity.x * CONST.PIXEL_SIZE, entity.y * CONST.PIXEL_SIZE, entity.width * CONST.PIXEL_SIZE, entity.height * CONST.PIXEL_SIZE);
+                this.ctx.drawImage(
+                    img,
+                    entity.x * CONST.PIXEL_SIZE,
+                    entity.y * CONST.PIXEL_SIZE,
+                    entity.width * CONST.PIXEL_SIZE,
+                    entity.height * CONST.PIXEL_SIZE
+                );
             }
         });
     }
