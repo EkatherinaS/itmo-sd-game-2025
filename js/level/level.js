@@ -16,7 +16,7 @@ export class Level {
                 this.entities = this.mapFactory.createRandom();
                 break;
             case "fromJSON":
-                this.mapFactory.createFromJSON(filePath || "/itmo-sd-game-2025/js/level/levelMaps/levelTest.json")
+                this.mapFactory.createFromJSON(filePath || "/itmo-sd-game-2025/levelMaps/levelTest.json")
                 .then(loadedEntities => {
                     this.entities = loadedEntities;
                     console.log('Entities loaded:', this.entities);
