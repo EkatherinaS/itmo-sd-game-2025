@@ -91,6 +91,9 @@ export class MapFactory {
     }
 
     createRandom(difficulty = 1) {
+        if(difficulty > 10) {
+            difficulty = 10;
+        }
         const entities = [];
         const blockCount = 5 + difficulty * 3;
         const maxAttempts = 100;
