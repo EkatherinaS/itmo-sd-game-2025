@@ -1,17 +1,19 @@
-import * as CONST from "../constants.js";
-import { Entity } from "../entities/entity.js";
+import * as CONST from '../constants.js';
+import { Entity } from '../entities/entity.js';
 
 export class MapFactory {
     async createFromJSON(filePath) {
         try {
             const response = await fetch(filePath);
             if (!response.ok) {
-                throw new Error(`Failed to load JSON: ${response.status} ${response.statusText}`);
+                throw new Error(
+                    `Failed to load JSON: ${response.status} ${response.statusText}`
+                );
             }
             const data = await response.json();
             return this.#parseJSONData(data);
         } catch (error) {
-            console.error("Error loading JSON:", error);
+            console.error('Error loading JSON:', error);
             return this.getTestData();
         }
     }
@@ -36,16 +38,69 @@ export class MapFactory {
 
     //Placeholder data
     getTestData() {
-        const entities = []
-        entities.push(new Entity("block.svg", 5, 5, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
-        entities.push(new Entity("block.svg", 70, 72, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
-        entities.push(new Entity("block.svg", 25, 32, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
-        entities.push(new Entity("entry.svg", 20, 84, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT, "entry"));
-        entities.push(new Entity("exit.svg", 120, 100, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT, "exit"));
+        const entities = [];
+        entities.push(
+            new Entity(
+                'block.svg',
+                5,
+                5,
+                CONST.BLOCK_WIDTH,
+                CONST.BLOCK_HEIGHT,
+                'block'
+            )
+        );
+        entities.push(
+            new Entity(
+                'block.svg',
+                70,
+                72,
+                CONST.BLOCK_WIDTH,
+                CONST.BLOCK_HEIGHT,
+                'block'
+            )
+        );
+        entities.push(
+            new Entity(
+                'block.svg',
+                25,
+                32,
+                CONST.BLOCK_WIDTH,
+                CONST.BLOCK_HEIGHT,
+                'block'
+            )
+        );
+        entities.push(
+            new Entity(
+                'entry.svg',
+                20,
+                84,
+                CONST.BLOCK_HEIGHT,
+                CONST.BLOCK_HEIGHT,
+                'entry'
+            )
+        );
+        entities.push(
+            new Entity(
+                'exit.svg',
+                120,
+                100,
+                CONST.BLOCK_HEIGHT,
+                CONST.BLOCK_HEIGHT,
+                'exit'
+            )
+        );
         return entities;
     }
 
-    #placeSpecialEntity(entities, image, xMin, xMax, yMin, yMax, maxAttempts = 100) {
+    #placeSpecialEntity(
+        entities,
+        image,
+        xMin,
+        xMax,
+        yMin,
+        yMax,
+        maxAttempts = 100
+    ) {
         let attempts = 0;
         let newEntity;
         let hasCollision;
@@ -54,18 +109,28 @@ export class MapFactory {
         do {
             newEntity = new Entity(
                 image,
-                Math.floor(Math.random() * (xMax - xMin - CONST.BLOCK_HEIGHT) + xMin),
-                Math.floor(Math.random() * (yMax - yMin - CONST.BLOCK_HEIGHT) + yMin),
+                Math.floor(
+                    Math.random() * (xMax - xMin - CONST.BLOCK_HEIGHT) + xMin
+                ),
+                Math.floor(
+                    Math.random() * (yMax - yMin - CONST.BLOCK_HEIGHT) + yMin
+                ),
                 CONST.BLOCK_HEIGHT,
                 CONST.BLOCK_HEIGHT,
                 image.includes('entry') ? 'entry' : 'exit'
             );
 
-            hasCollision = this.#checkCollision(newEntity, entities, minSpacing);
+            hasCollision = this.#checkCollision(
+                newEntity,
+                entities,
+                minSpacing
+            );
             attempts++;
 
             if (attempts >= maxAttempts) {
-                console.error(`Не удалось разместить ${image} после максимального количества попыток`);
+                console.error(
+                    `Не удалось разместить ${image} после максимального количества попыток`
+                );
                 return null;
             }
         } while (hasCollision);
@@ -91,7 +156,7 @@ export class MapFactory {
     }
 
     createRandom(difficulty = 1) {
-        if(difficulty > 10) {
+        if (difficulty > 10) {
             difficulty = 10;
         }
         const entities = [];
@@ -106,19 +171,29 @@ export class MapFactory {
 
             do {
                 newEntity = new Entity(
-                    "block.svg",
-                    Math.floor(Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_WIDTH)),
-                    Math.floor(Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)),
+                    'block.svg',
+                    Math.floor(
+                        Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_WIDTH)
+                    ),
+                    Math.floor(
+                        Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
+                    ),
                     CONST.BLOCK_WIDTH,
                     CONST.BLOCK_HEIGHT,
-                    "block"
+                    'block'
                 );
 
-                hasCollision = this.#checkCollision(newEntity, entities, minSpacing);
+                hasCollision = this.#checkCollision(
+                    newEntity,
+                    entities,
+                    minSpacing
+                );
                 attempts++;
 
                 if (attempts >= maxAttempts) {
-                    console.warn("Не удалось разместить блок после максимального количества попыток");
+                    console.warn(
+                        'Не удалось разместить блок после максимального количества попыток'
+                    );
                     break;
                 }
             } while (hasCollision);
@@ -128,10 +203,24 @@ export class MapFactory {
             }
         }
 
-        const entry = this.#placeSpecialEntity(entities, "entry.svg", 0, 50, 0, 50);
+        const entry = this.#placeSpecialEntity(
+            entities,
+            'entry.svg',
+            0,
+            50,
+            0,
+            50
+        );
         if (entry) entities.push(entry);
 
-        const exit = this.#placeSpecialEntity(entities, "exit.svg", 70, 120, 70, 120);
+        const exit = this.#placeSpecialEntity(
+            entities,
+            'exit.svg',
+            70,
+            120,
+            70,
+            120
+        );
         if (exit) entities.push(exit);
 
         return entities;
