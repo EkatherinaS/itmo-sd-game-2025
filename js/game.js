@@ -10,7 +10,9 @@ class Game {
         const ctx = canvas.getContext('2d');
         this.loop = this.loop.bind(this);
 
-        this.level = new Level();
+        // this.level = new Level(); //тестовая заглушка
+        // this.level = new Level('random'); //ToDo
+        this.level = new Level('fromJSON', "/itmo-sd-game-2025/js/level/levelMaps/levelFirst.json");
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);
         this.controller = new Controller();
