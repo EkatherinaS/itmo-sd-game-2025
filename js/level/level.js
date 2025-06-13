@@ -4,41 +4,68 @@ import { Entity } from "../entities/entity.js";
 import { Position } from "./position.js";
 import { PositionInfo } from "./positionInfo.js";
 import { PositionLookup } from "./positionLookup.js";
-
+import { MapFactory } from "./mapFactory.js";
 
 export class Level {
 
-    constructor() {
-        //this.mapFactory = new MapFactory();
-        //this.map = this.mapFactory.createMap();
-        this.entities = this.#getTestData();
-    }
+    constructor(mapType = null, filePath = null) {
+        this.mapFactory = new MapFactory();
 
-    //Placeholder data 
-    #getTestData() {
-        const entities = []
-        entities.push(new Entity("block.svg", 5, 5, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT));
-        entities.push(new Entity("block.svg", 70, 72, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT));
-        entities.push(new Entity("block.svg", 25, 32, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT));
-        entities.push(new Entity("entry.svg", 20, 84, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT));
-        entities.push(new Entity("exit.svg", 120, 100, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT));
-        return entities;
+        switch (mapType) {
+            case "random":
+                this.entities = this.mapFactory.createRandom();
+                break;
+            case "fromJSON":
+                this.mapFactory.createFromJSON(filePath || "/itmo-sd-game-2025/js/level/levelMaps/levelTest.json")
+                .then(loadedEntities => {
+                    this.entities = loadedEntities;
+                    console.log('Entities loaded:', this.entities);
+                })
+                .catch(error => {
+                    console.error('Loading failed, using test data:', error);
+                    this.entities = this.mapFactory.getTestData();
+                });
+                break;
+            case null:
+                this.entities = this.mapFactory.getTestData();
+                break;
+            default:
+                throw new Error(`Unknown map type: ${mapType}`);
+        }
     }
 
     //Also placeholder data
     getPositionLookup() {
-        var lookup = new Map();
-        for (let i = 0; i < CONST.BLOCK_WIDTH; i++) {
-            for (let j = 0; j < CONST.BLOCK_HEIGHT; j++) {
-                lookup.set((new Position(5 + i, 5 + j)).toString(), new PositionInfo(0, false, false, true));
-                lookup.set((new Position(70 + i, 72 + j)).toString(), new PositionInfo(0, false, false, true));
-                lookup.set((new Position(25 + i, 32 + j)).toString(), new PositionInfo(0, false, false, true));
-                lookup.set((new Position(20 + i, 84 + j)).toString(), new PositionInfo(0, true, false, false));
-                lookup.set((new Position(96 + i, 110 + j)).toString(), new PositionInfo(0, false, true, false));
+        const lookup = new Map();
+
+    this.entities.forEach(entity => {
+        const x = entity.x;
+        const y = entity.y;
+        const width = entity.width || CONST.BLOCK_WIDTH;
+        const height = entity.height || CONST.BLOCK_HEIGHT;
+
+        let isSolid = false;
+        let isEntry = false;
+        let isExit = false;
+
+        if (entity.type === 'block') {
+            isSolid = true;
+        } else if (entity.type === 'entry') {
+            isEntry = true;
+        } else if (entity.type === 'exit') {
+            isExit = true;
+        }
+
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < height; j++) {
+                const pos = new Position(x + i, y + j).toString();
+                lookup.set(pos, new PositionInfo(0, isEntry, isExit, isSolid));
             }
         }
-        return new PositionLookup(lookup);
-    }
+    });
+
+    return new PositionLookup(lookup);
+}
 
     getEntities() {
         return this.entities;
