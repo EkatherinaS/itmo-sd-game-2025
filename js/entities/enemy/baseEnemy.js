@@ -1,9 +1,8 @@
-import * as CONST from "../../constants.js"
-import { Enemy } from "./enemy.js";
-import { StateNormal } from "./stateNormal.js";
+import * as CONST from '../../constants.js';
+import { Enemy } from './enemy.js';
+import { StateNormal } from './stateNormal.js';
 
 export class BaseEnemy extends Enemy {
-
     constructor(sprite, x, y) {
         super(sprite, x, y);
         this.state = new StateNormal();
@@ -25,18 +24,25 @@ export class BaseEnemy extends Enemy {
         const checkNewX = Math.round(nextX);
         const checkNewY = Math.round(nextY);
 
-        const blockedX = positionLookup.getPositionInfo(checkNewX, checkY).blocked ||
+        const blockedX =
+            positionLookup.getPositionInfo(checkNewX, checkY).blocked ||
             positionLookup.getPositionInfo(checkNewX + width, checkY).blocked ||
-            positionLookup.getPositionInfo(checkNewX, checkY + height).blocked ||
-            positionLookup.getPositionInfo(checkNewX + width, checkY + height).blocked;
+            positionLookup.getPositionInfo(checkNewX, checkY + height)
+                .blocked ||
+            positionLookup.getPositionInfo(checkNewX + width, checkY + height)
+                .blocked;
 
-        const blockedY = positionLookup.getPositionInfo(checkX, checkNewY).blocked ||
+        const blockedY =
+            positionLookup.getPositionInfo(checkX, checkNewY).blocked ||
             positionLookup.getPositionInfo(checkX + width, checkNewY).blocked ||
-            positionLookup.getPositionInfo(checkX, checkNewY + height).blocked ||
-            positionLookup.getPositionInfo(checkX + width, checkNewY + height).blocked;
+            positionLookup.getPositionInfo(checkX, checkNewY + height)
+                .blocked ||
+            positionLookup.getPositionInfo(checkX + width, checkNewY + height)
+                .blocked;
 
         const wallX = nextX < 0 || nextX > CONST.GAME_WIDTH - CONST.ENEMY_WIDTH;
-        const wallY = nextY < 0 || nextY > CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT;
+        const wallY =
+            nextY < 0 || nextY > CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT;
 
         if (!blockedX && !wallX) this.x = nextX;
         if (!blockedY && !wallY) this.y = nextY;

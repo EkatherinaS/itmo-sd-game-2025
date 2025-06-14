@@ -1,7 +1,6 @@
-import { BehaviourStrategy } from "./behaviourStrategy.js";
+import { BehaviourStrategy } from './behaviourStrategy.js';
 
 export class BehaviourCowardy extends BehaviourStrategy {
-
     constructor() {
         super();
         this.threshold = 30;
@@ -9,7 +8,6 @@ export class BehaviourCowardy extends BehaviourStrategy {
     }
 
     getMoveDirection(enemy, player) {
-
         const dx = player.x - enemy.x;
         const dy = player.y - enemy.y;
 
@@ -36,8 +34,8 @@ export class BehaviourCowardy extends BehaviourStrategy {
 
         this.direction = {
             x: dirX,
-            y: dirY
-        }
+            y: dirY,
+        };
 
         return this.direction;
     }

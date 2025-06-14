@@ -1,5 +1,4 @@
 export class BehaviourStrategy {
-
     constructor() {
         this.direction = { x: 0, y: 0 };
     }

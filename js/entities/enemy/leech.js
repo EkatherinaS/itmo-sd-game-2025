@@ -1,9 +1,8 @@
-import { BaseEnemy } from "./baseEnemy.js";
-import { BehaviourPassive } from "./behaviourPassive.js";
-import * as CONST from "../../constants.js"
+import { BaseEnemy } from './baseEnemy.js';
+import { BehaviourPassive } from './behaviourPassive.js';
+import * as CONST from '../../constants.js';
 
 export class Leech extends BaseEnemy {
-
     constructor(x, y) {
         const sprite = CONST.ENEMY_SPRITES['leech'][0];
         super(sprite, x, y);

@@ -1,9 +1,8 @@
-import { BaseEnemy } from "./baseEnemy.js";
-import { BehaviourCowardy } from "./behaviourCowardy.js";
-import * as CONST from "../../constants.js"
+import { BaseEnemy } from './baseEnemy.js';
+import { BehaviourCowardy } from './behaviourCowardy.js';
+import * as CONST from '../../constants.js';
 
 export class Slug extends BaseEnemy {
-
     constructor(x, y) {
         const sprite = CONST.ENEMY_SPRITES['slug'][0];
         super(sprite, x, y);

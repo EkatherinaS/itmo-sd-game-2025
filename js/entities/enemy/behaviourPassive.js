@@ -1,7 +1,6 @@
-import { BehaviourStrategy } from "./behaviourStrategy.js";
+import { BehaviourStrategy } from './behaviourStrategy.js';
 
 export class BehaviourPassive extends BehaviourStrategy {
-
     constructor() {
         super();
         this.randomPercent = 10;
@@ -16,8 +15,8 @@ export class BehaviourPassive extends BehaviourStrategy {
 
         this.direction = {
             x: dirX,
-            y: dirY
-        }
+            y: dirY,
+        };
 
         return this.direction;
     }

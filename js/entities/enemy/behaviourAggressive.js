@@ -1,7 +1,6 @@
-import { BehaviourStrategy } from "./behaviourStrategy.js";
+import { BehaviourStrategy } from './behaviourStrategy.js';
 
 export class BehaviourAggressive extends BehaviourStrategy {
-
     constructor() {
         super();
         this.threshold = 10;
@@ -9,7 +8,6 @@ export class BehaviourAggressive extends BehaviourStrategy {
     }
 
     getMoveDirection(enemy, player) {
-
         const dx = (player.x - enemy.x) * Math.random();
         const dy = (player.y - enemy.y) * Math.random();
 
@@ -36,8 +34,8 @@ export class BehaviourAggressive extends BehaviourStrategy {
 
         this.direction = {
             x: dirX,
-            y: dirY
-        }
+            y: dirY,
+        };
 
         return this.direction;
     }

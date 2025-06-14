@@ -25,7 +25,7 @@ class Game {
     }
 
     loop() {
-        this.entityManager.moveAll()
+        this.entityManager.moveAll();
         const entities = this.entityManager.getAllEntities();
         const map = this.level.getEntities();
         this.renderer.renderEntities(entities);

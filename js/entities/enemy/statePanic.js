@@ -1,11 +1,11 @@
-import { State } from "./state.js";
+import { State } from './state.js';
 
 export class StatePanic extends State {
-
     constructor() {
         super();
     }
 
-    getMoveSpeed() { return 4; }
-
+    getMoveSpeed() {
+        return 4;
+    }
 }
