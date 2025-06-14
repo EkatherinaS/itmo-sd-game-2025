@@ -21,6 +21,11 @@ class Game {
     start() {
         const positionLookup = this.level.getPositionLookup();
         this.controller.setEventListeners(this.entityManager, positionLookup);
+        const entryPos = this.level.getEntryPosition();
+        const spawnX = entryPos ? entryPos.x - 4 : Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;;
+        const spawnY = entryPos ? entryPos.y - 5 : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
+
+        this.entityManager.getPlayer().setCoords(spawnX, spawnY);
         this.loop();
     }
 

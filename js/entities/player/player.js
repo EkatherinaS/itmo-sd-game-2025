@@ -16,4 +16,9 @@ export class Player extends Actor {
         this.frame = (this.frame + 1) % 4;
         return this.frame;
     }
+
+    setCoords(input_x, input_y){
+        this.x = input_x;
+        this.y = input_y;
+    }
 }
