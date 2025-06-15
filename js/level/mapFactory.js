@@ -39,9 +39,39 @@ export class MapFactory {
         const entities = []
         entities.push(new Entity("block.svg", 5, 5, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
         entities.push(new Entity("block.svg", 70, 72, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
-        entities.push(new Entity("block.svg", 25, 32, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 25, 42, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
         entities.push(new Entity("entry.svg", 20, 84, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT, "entry"));
         entities.push(new Entity("exit.svg", 120, 100, CONST.BLOCK_HEIGHT, CONST.BLOCK_HEIGHT, "exit"));
+
+        entities.push(new Entity("block.svg", 30, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 40, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 40, 10, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 40, 20, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 40, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 50, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+
+        entities.push(new Entity("block.svg", 70, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 70, 10, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 80, 10, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 70, 20, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 70, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 80, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 80, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+
+        entities.push(new Entity("block.svg", 100, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 100, 10, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 100, 20, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 100, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 110, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 110, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+
+        entities.push(new Entity("block.svg", 130, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 140, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 140, 10, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 140, 20, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 140, 30, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+        entities.push(new Entity("block.svg", 150, 0, CONST.BLOCK_WIDTH, CONST.BLOCK_HEIGHT, "block"));
+
         return entities;
     }
 

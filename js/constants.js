@@ -44,3 +44,9 @@ export const PLAYER_SPRITES = {
     "right": ["lumen/lumen-right1.svg", "lumen/lumen-right2.svg", "lumen/lumen-right3.svg", "lumen/lumen-right4.svg"],
     "down": ["lumen/lumen-down1.svg", "lumen/lumen-down2.svg", "lumen/lumen-down3.svg", "lumen/lumen-down4.svg"]
 }
+
+export const LEVEL_TYPES = {
+    RANDOM: 'random',
+    FROM_JSON: 'fromJSON',
+    TEST: 'test'
+};
