@@ -81,3 +81,9 @@ export const PLAYER_SPRITES = {
         'lumen/lumen-down4.svg',
     ],
 };
+
+export const LEVEL_TYPES = {
+    RANDOM: 'random',
+    FROM_JSON: 'fromJSON',
+    TEST: 'test',
+};

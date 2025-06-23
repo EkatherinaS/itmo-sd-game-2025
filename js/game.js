@@ -9,17 +9,29 @@ class Game {
         const ctx = canvas.getContext('2d');
         this.loop = this.loop.bind(this);
 
-        // this.level = new Level(); //тестовая заглушка
-        this.level = new Level('random', null, 10); //не больше 10; нормирование обрезанием по 10 зашита в функции генерации
-        // this.level = new Level('fromJSON', "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+        // this.level = Level.create(CONST.LEVEL_TYPES.TEST);
+        this.level = Level.create(CONST.LEVEL_TYPES.RANDOM, null, 5);
+        // this.level = Level.create(CONST.LEVEL_TYPES.FROM_JSON, "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);
         this.controller = new Controller();
     }
 
-    start() {
+    async start() {
+        await this.level.init();
+
         const positionLookup = this.level.getPositionLookup();
         this.controller.setEventListeners(this.entityManager, positionLookup);
+        const entryPos = this.level.getEntryPosition();
+        const spawnX = entryPos
+            ? entryPos.x - 4
+            : Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;
+        const spawnY = entryPos
+            ? entryPos.y - 5
+            : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
+
+        this.entityManager.getPlayer().setCoords(spawnX, spawnY);
         this.loop();
     }
 
