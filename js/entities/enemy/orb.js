@@ -5,7 +5,7 @@ import * as CONST from '../../constants.js';
 export class Orb extends BaseEnemy {
     constructor(x, y) {
         const sprite = CONST.ENEMY_SPRITES['orb'][0];
-        super(sprite, x, y);
+        super(sprite, x, y, CONST.ENEMY_ORB_HP, CONST.ENEMY_ORB_POWER, CONST.ENEMY_ORB_ARMOR);
         this.strategy = new BehaviourAggressive();
         this.frameCount = 6;
     }

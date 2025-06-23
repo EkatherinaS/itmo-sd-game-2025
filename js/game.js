@@ -26,6 +26,9 @@ class Game {
 
     loop() {
         this.entityManager.moveAll();
+        this.entityManager.checkCollide();
+        //this.entityManager.checkEndGame();
+        //his.entityManager.checkNextLevel();
         const entities = this.entityManager.getAllEntities();
         const map = this.level.getEntities();
         this.renderer.renderEntities(entities);

@@ -6,8 +6,26 @@ export const GAME_HEIGHT = 120;
 export const ENEMY_WIDTH = 8;
 export const ENEMY_HEIGHT = 8;
 
-export const PLAYER_WIDTH = 7;
+export const BONUS_WIDTH = 8;
+export const BONUS_HEIGHT = 8;
+
+export const ENEMY_LEECH_HP = 40;
+export const ENEMY_LEECH_POWER = 10;
+export const ENEMY_LEECH_ARMOR = 0;
+
+export const ENEMY_ORB_HP = 30;
+export const ENEMY_ORB_POWER = 15;
+export const ENEMY_ORB_ARMOR = 0;
+
+export const ENEMY_SLUG_HP = 20;
+export const ENEMY_SLUG_POWER = 20;
+export const ENEMY_SLUG_ARMOR = 0;
+
+export const PLAYER_WIDTH = 8;
 export const PLAYER_HEIGHT = 8;
+export const PLAYER_INIT_HP = 100;
+export const PLAYER_INIT_POWER = 5;
+export const PLAYER_INIT_ARMOR = 20;
 
 export const LIGHT_WIDTH = 16;
 export const LIGHT_HEIGHT = 16;
@@ -38,6 +56,9 @@ export const IMAGES = [
     'entry.svg',
     'exit.svg',
     'debug.svg',
+    'lumen/light-green.svg',
+    'lumen/light-pink.svg',
+    'lumen/light-yellow.svg',
     'lumen/lumen-left1.svg',
     'lumen/lumen-left2.svg',
     'lumen/lumen-left3.svg',
@@ -74,7 +95,22 @@ export const IMAGES = [
     'shadow/slug6.svg',
     'shadow/slug7.svg',
     'shadow/slug8.svg',
+    'mushroom-green.svg',
+    'mushroom-yellow.svg',
+    'mushroom-pink.svg'
 ];
+
+export const LIGHT_SPRITES = {
+    green: 'lumen/light-green.svg',
+    yellow: 'lumen/light-yellow.svg',
+    pink: 'lumen/light-pink.svg',
+};
+
+export const MUSHROOM_SPRITES = {
+    green: 'mushroom-green.svg',
+    yellow: 'mushroom-yellow.svg',
+    pink: 'mushroom-pink.svg',
+};
 
 export const PLAYER_SPRITES = {
     left: [

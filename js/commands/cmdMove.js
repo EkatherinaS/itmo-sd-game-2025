@@ -70,5 +70,6 @@ export class CmdMove extends Command {
 
         const frame = this.player.getNextFrame();
         this.player.sprite = CONST.PLAYER_SPRITES[this.direction][frame];
+        this.player.updateLight();
     }
 }

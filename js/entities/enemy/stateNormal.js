@@ -1,8 +1,8 @@
 import { State } from './state.js';
 
 export class StateNormal extends State {
-    constructor() {
-        super();
+    constructor(enemy) {
+        super(enemy);
     }
 
     getMoveSpeed() {
