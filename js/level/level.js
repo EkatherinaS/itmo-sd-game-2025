@@ -1,4 +1,3 @@
-// level/level.js
 import { LEVEL_TYPES } from "../constants.js";
 import { LevelRandom } from "./levelRandom.js";
 import { LevelFromJSON } from "./levelFromJSON.js";
@@ -13,6 +12,7 @@ export class Level {
                 return new LevelFromJSON(filePath);
             case LEVEL_TYPES.TEST:
                 return new LevelTest();
+
             default:
                 throw new Error(`Unknown map type: ${mapType}`);
         }
