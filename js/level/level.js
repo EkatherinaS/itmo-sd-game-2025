@@ -2,6 +2,7 @@ import * as CONST from '../constants.js';
 
 import { Entity } from '../entities/entity.js';
 import { Position } from './position.js';
+import { GameMap } from './gameMap.js';
 import { PositionInfo } from './positionInfo.js';
 import { PositionLookup } from './positionLookup.js';
 
@@ -89,5 +90,9 @@ export class Level {
 
     getEntities() {
         return this.entities;
+    }
+
+    getMap() {
+        return new GameMap();
     }
 }
