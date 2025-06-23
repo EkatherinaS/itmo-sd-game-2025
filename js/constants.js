@@ -97,7 +97,7 @@ export const IMAGES = [
     'shadow/slug8.svg',
     'mushroom-green.svg',
     'mushroom-yellow.svg',
-    'mushroom-pink.svg'
+    'mushroom-pink.svg',
 ];
 
 export const LIGHT_SPRITES = {

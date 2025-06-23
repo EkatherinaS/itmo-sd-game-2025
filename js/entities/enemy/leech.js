@@ -5,7 +5,14 @@ import * as CONST from '../../constants.js';
 export class Leech extends BaseEnemy {
     constructor(x, y) {
         const sprite = CONST.ENEMY_SPRITES['leech'][0];
-        super(sprite, x, y, CONST.ENEMY_LEECH_HP, CONST.ENEMY_LEECH_POWER, CONST.ENEMY_LEECH_ARMOR);
+        super(
+            sprite,
+            x,
+            y,
+            CONST.ENEMY_LEECH_HP,
+            CONST.ENEMY_LEECH_POWER,
+            CONST.ENEMY_LEECH_ARMOR
+        );
         this.strategy = new BehaviourPassive();
         this.frameCount = 6;
         this.slowCount = 6;

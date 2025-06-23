@@ -12,7 +12,13 @@ export class BaseEnemy extends Enemy {
     }
 
     fight(player) {
-        const hit = player.fight(this.x, this.y, this.power, this.width, this.height);
+        const hit = player.fight(
+            this.x,
+            this.y,
+            this.power,
+            this.width,
+            this.height
+        );
         if (hit == 0) return;
 
         this.hp -= hit;

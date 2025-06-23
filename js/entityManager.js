@@ -18,7 +18,10 @@ export class EntityManager {
     }
 
     getAllEntities() {
-        return this.player.getEntities().concat(this.enemies).concat(this.bonuses);
+        return this.player
+            .getEntities()
+            .concat(this.enemies)
+            .concat(this.bonuses);
     }
 
     setEntities(map) {
@@ -65,8 +68,8 @@ export class EntityManager {
         this.bonuses.forEach(bonus => {
             bonus.check(this.player);
         });
-        this.enemies = this.enemies.filter((enemy) => enemy.isAlive());
-        this.bonuses = this.bonuses.filter((bonus) => bonus.isAlive());
+        this.enemies = this.enemies.filter(enemy => enemy.isAlive());
+        this.bonuses = this.bonuses.filter(bonus => bonus.isAlive());
     }
 
     checkEndGame() {

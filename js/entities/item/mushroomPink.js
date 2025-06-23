@@ -8,7 +8,12 @@ export class MushroomPink extends Bonus {
     }
 
     check(player) {
-        const eat = player.checkCollide(this.x, this.y, this.width, this.height);
+        const eat = player.checkCollide(
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
         if (!eat) return false;
         player.setPinkLight();
         this.alive = false;

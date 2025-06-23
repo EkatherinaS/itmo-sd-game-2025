@@ -6,7 +6,7 @@ export class StatePanic extends State {
 
         setTimeout(() => {
             enemy.changeToNormalState();
-        }, "1000");
+        }, '1000');
     }
 
     getMoveSpeed() {
