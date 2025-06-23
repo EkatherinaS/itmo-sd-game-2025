@@ -1,9 +1,8 @@
-import * as CONST from "./constants.js"
-import { Renderer } from "./renderer.js"
-import { EntityManager } from "./entityManager.js";
-import { Controller } from "./controller.js";
-import { Level } from "./level/level.js";
-
+import * as CONST from './constants.js';
+import { Renderer } from './renderer.js';
+import { EntityManager } from './entityManager.js';
+import { Controller } from './controller.js';
+import { Level } from './level/level.js';
 
 class Game {
     constructor(canvas) {
@@ -11,8 +10,8 @@ class Game {
         this.loop = this.loop.bind(this);
 
         // this.level = new Level(); //тестовая заглушка
-        // this.level = new Level('random'); //ToDo
-        this.level = new Level('fromJSON', "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+        this.level = new Level('random', null, 10); //не больше 10; нормирование обрезанием по 10 зашита в функции генерации
+        // this.level = new Level('fromJSON', "/itmo-sd-game-2025/levelMaps/levelFirst.json");
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);
         this.controller = new Controller();
@@ -39,13 +38,13 @@ function startGame() {
     game.start();
 }
 
-const startBtn = document.getElementById("startButton");
+const startBtn = document.getElementById('startButton');
 startBtn.addEventListener('click', startGame);
 
-const audioPlayer = document.getElementById("audioPlayer");
+const audioPlayer = document.getElementById('audioPlayer');
 audioPlayer.volume = 0.1;
 
-const canvas = document.getElementById("gameCanvas");
+const canvas = document.getElementById('gameCanvas');
 canvas.width = CONST.GAME_WIDTH * CONST.PIXEL_SIZE;
 canvas.height = CONST.GAME_HEIGHT * CONST.PIXEL_SIZE;
 const container = canvas.parentElement;
