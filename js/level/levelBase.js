@@ -1,12 +1,12 @@
-import { Position } from "./position.js";
-import { PositionInfo } from "./positionInfo.js";
-import { PositionLookup } from "./positionLookup.js";
-import * as CONST from "../constants.js";
+import { Position } from './position.js';
+import { PositionInfo } from './positionInfo.js';
+import { PositionLookup } from './positionLookup.js';
+import * as CONST from '../constants.js';
 
 export class LevelBase {
     constructor() {
         if (new.target === LevelBase) {
-            throw new Error("LevelBase is abstract and cannot be instantiated");
+            throw new Error('LevelBase is abstract and cannot be instantiated');
         }
         this.entities = [];
     }
@@ -39,7 +39,10 @@ export class LevelBase {
             for (let i = 0; i < width; i++) {
                 for (let j = 0; j < height; j++) {
                     const pos = new Position(x + i, y + j).toString();
-                    lookup.set(pos, new PositionInfo(0, isEntry, isExit, isSolid));
+                    lookup.set(
+                        pos,
+                        new PositionInfo(0, isEntry, isExit, isSolid)
+                    );
                 }
             }
         });

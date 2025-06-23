@@ -1,7 +1,7 @@
-import { LEVEL_TYPES } from "../constants.js";
-import { LevelRandom } from "./levelRandom.js";
-import { LevelFromJSON } from "./levelFromJSON.js";
-import { LevelTest } from "./levelTest.js";
+import { LEVEL_TYPES } from '../constants.js';
+import { LevelRandom } from './levelRandom.js';
+import { LevelFromJSON } from './levelFromJSON.js';
+import { LevelTest } from './levelTest.js';
 
 export class Level {
     static create(mapType = LEVEL_TYPES.TEST, filePath = null, difficulty = 1) {

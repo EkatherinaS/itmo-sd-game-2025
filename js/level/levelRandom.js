@@ -1,5 +1,5 @@
-import { LevelBase } from "./levelBase.js";
-import { MapFactory } from "./mapFactory.js";
+import { LevelBase } from './levelBase.js';
+import { MapFactory } from './mapFactory.js';
 
 export class LevelRandom extends LevelBase {
     constructor(difficulty = 1) {

@@ -56,14 +56,34 @@ export const IMAGES = [
     'lumen/lumen-down4.svg',
 ];
 export const PLAYER_SPRITES = {
-    "left": ["lumen/lumen-left1.svg", "lumen/lumen-left2.svg", "lumen/lumen-left3.svg", "lumen/lumen-left4.svg"],
-    "up": ["lumen/lumen-up1.svg", "lumen/lumen-up2.svg", "lumen/lumen-up3.svg", "lumen/lumen-up4.svg"],
-    "right": ["lumen/lumen-right1.svg", "lumen/lumen-right2.svg", "lumen/lumen-right3.svg", "lumen/lumen-right4.svg"],
-    "down": ["lumen/lumen-down1.svg", "lumen/lumen-down2.svg", "lumen/lumen-down3.svg", "lumen/lumen-down4.svg"]
-}
+    left: [
+        'lumen/lumen-left1.svg',
+        'lumen/lumen-left2.svg',
+        'lumen/lumen-left3.svg',
+        'lumen/lumen-left4.svg',
+    ],
+    up: [
+        'lumen/lumen-up1.svg',
+        'lumen/lumen-up2.svg',
+        'lumen/lumen-up3.svg',
+        'lumen/lumen-up4.svg',
+    ],
+    right: [
+        'lumen/lumen-right1.svg',
+        'lumen/lumen-right2.svg',
+        'lumen/lumen-right3.svg',
+        'lumen/lumen-right4.svg',
+    ],
+    down: [
+        'lumen/lumen-down1.svg',
+        'lumen/lumen-down2.svg',
+        'lumen/lumen-down3.svg',
+        'lumen/lumen-down4.svg',
+    ],
+};
 
 export const LEVEL_TYPES = {
     RANDOM: 'random',
     FROM_JSON: 'fromJSON',
-    TEST: 'test'
+    TEST: 'test',
 };
