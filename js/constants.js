@@ -1,16 +1,16 @@
 export const PIXEL_SIZE = 4;
 
 export const GAME_WIDTH = 160;
-export const GAME_HEIGHT = 120;
+export const GAME_HEIGHT = 128;
 
 export const INFO_ITEM_WIDTH = 12;
 export const INFO_ITEM_HEIGHT = 12;
 
-export const ENEMY_WIDTH = 8;
-export const ENEMY_HEIGHT = 8;
-
 export const BONUS_WIDTH = 8;
 export const BONUS_HEIGHT = 8;
+
+export const ENEMY_WIDTH = 8;
+export const ENEMY_HEIGHT = 8;
 
 export const ENEMY_LEECH_HP = 40;
 export const ENEMY_LEECH_POWER = 10;
@@ -26,6 +26,10 @@ export const ENEMY_SLUG_ARMOR = 0;
 
 export const PLAYER_WIDTH = 8;
 export const PLAYER_HEIGHT = 8;
+export const PLAYER_ARMOR_MOD = 2;
+export const PLAYER_HP_MOD = 10;
+export const PLAYER_POWER_MOD = 2;
+export const PLAYER_ARMOR_MIN = 15;
 
 export const LIGHT_WIDTH = 16;
 export const LIGHT_HEIGHT = 16;
@@ -44,10 +48,10 @@ export const KEY_ITEM_1 = ['1'];
 export const KEY_ITEM_2 = ['2'];
 export const KEY_ITEM_3 = ['3'];
 
-export const KEY_UP = ['w', 'W', 'ArrowUp'];
-export const KEY_DOWN = ['s', 'S', 'ArrowDown'];
-export const KEY_LEFT = ['a', 'A', 'ArrowLeft'];
-export const KEY_RIGHT = ['d', 'D', 'ArrowRight'];
+export const KEY_UP = ['ц', 'Ц', 'w', 'W', 'ArrowUp'];
+export const KEY_DOWN = ['ы', 'Ы', 's', 'S', 'ArrowDown'];
+export const KEY_LEFT = ['ф', 'Ф', 'a', 'A', 'ArrowLeft'];
+export const KEY_RIGHT = ['в', 'В', 'd', 'D', 'ArrowRight'];
 
 export const GREEN_MUSHROOM = 'green_mushroom';
 export const BLUE_MUSHROOM = 'blue_mushroom';

@@ -41,7 +41,7 @@ export class Player extends Actor {
 
     fight(x, y, power, width, height) {
         if (this.checkCollide(x, y, height, width)) {
-            this.hp -= power;
+            this.hp = Math.max(this.hp - power, 0);
         }
         if (
             Math.abs(x - (this.x + this.width / 2)) ** 2 +
@@ -57,8 +57,9 @@ export class Player extends Actor {
         if (this.light != null) {
             this.light.setSize(this.armor + this.light.armor);
             this.light.move(this.x + this.width / 2, this.y + this.height / 2);
-            if (this.light.duration > 0) {
-                setTimeout(() => {
+            if (this.light.duration > 0 && !this.light.timeoutId) {
+                this.light.timeoutId = setTimeout(() => {
+                    this.light.timeoutId = null;
                     this.setYellowLight();
                 }, this.light.duration);
             }
@@ -93,8 +94,11 @@ export class Player extends Actor {
     }
 
     updateLvl(lvl) {
-        this.power = lvl * 1;
-        this.hp = lvl * 10;
-        this.armor = Math.max(lvl * 5, 15);
+        this.power = lvl * CONST.PLAYER_POWER_MOD;
+        this.hp = lvl * CONST.PLAYER_HP_MOD;
+        this.armor = Math.max(
+            lvl * CONST.PLAYER_ARMOR_MOD,
+            CONST.PLAYER_ARMOR_MIN
+        );
     }
 }

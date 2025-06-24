@@ -7,6 +7,8 @@ export class Renderer {
         this.images = {};
 
         this.ctxInfo.imageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = false;
+
         this.ctxInfo.font = 'bold 14px "Press Start 2P", Courier, monospace';
         this.ctxInfo.fillStyle = '#e0e0e0';
         this.ctxInfo.strokeStyle = '#222';
@@ -50,7 +52,7 @@ export class Renderer {
         );
         for (let i = 0; i < inventory.length; i++) {
             const item = inventory[i];
-            item.x = (item.width + this.offset + this.gap) * i;
+            item.x = (item.width + this.offset + this.gap) * i + this.offset;
             this.drawEntity(this.ctxInfo, item);
             this.writeText(
                 this.ctxInfo,

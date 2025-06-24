@@ -1,71 +1,73 @@
 html,
 body {
-    height: 100%;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 body {
-    background-color: #222034;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    background-color: #222034;
+    font-family: 'Press Start 2P', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1.4;
 }
 
 #content {
     display: flex;
-    height: 90vh;
-    width: 100%;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: relative;
+    height: fit-content;
+    width: 100%;
     gap: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
-#content img {
+#border-img {
     height: 100%;
     width: auto;
     object-fit: contain;
 }
 
-#game {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#info {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-}
-
 #layout {
-    height: 100%;
-    width: auto;
-    max-height: 90vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-canvas {
+#game {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 8px solid #fffcbc;
     border-radius: 12px;
     box-shadow:
         0 0 0 4px rgba(0, 0, 0, 0.1),
         0 8px 20px rgba(0, 0, 0, 0.2);
-    background-color: #222034;
+}
 
+#info {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+canvas {
+    display: block;
     image-rendering: pixelated;
-    height: 100%;
-    max-height: 90vh;
-    aspect-ratio: 500/ 375;
-    max-height: 90vh;
-    max-width: calc(90vh * (500 / 375));
 }
 
 #startButton {
@@ -75,22 +77,18 @@ canvas {
     transform: translate(-50%, -50%);
     z-index: 9999;
 
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
     background-color: #fffbcb;
     color: #333;
-    border: none;
-
-    padding: 15px 30px;
-    border-radius: 30px;
     font-size: 18px;
     font-weight: bold;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
 
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
