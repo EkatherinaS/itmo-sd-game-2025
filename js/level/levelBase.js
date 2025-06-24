@@ -8,11 +8,41 @@ export class LevelBase {
         if (new.target === LevelBase) {
             throw new Error('LevelBase is abstract and cannot be instantiated');
         }
-        this.entities = [];
+
+        this.entry = null;
+        this.exit = null;
+        this.blocks = [];
+        this.enemies = [];
+        this.bonuses = [];
+
+        this.#getPlaceholderData();
     }
 
     async init() {
         throw new Error("Method 'init()' must be implemented");
+    }
+
+    //TODO: generate enemies & bonuses according to difficulty
+    #getPlaceholderData() {
+        for (let i = 1; i < 5; i++) {
+            const x = Math.floor(
+                Math.random() * (CONST.GAME_WIDTH - CONST.ENEMY_WIDTH)
+            );
+            const y = Math.floor(
+                Math.random() * (CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT)
+            );
+            this.enemies.push(new Position(x, y));
+        }
+
+        for (let i = 1; i < 5; i++) {
+            const x = Math.floor(
+                Math.random() * (CONST.GAME_WIDTH - CONST.ENEMY_WIDTH)
+            );
+            const y = Math.floor(
+                Math.random() * (CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT)
+            );
+            this.bonuses.push(new Position(x, y));
+        }
     }
 
     getPositionLookup() {
@@ -42,12 +72,18 @@ export class LevelBase {
         return new PositionLookup(lookup);
     }
 
-    getEntities() {
-        return this.entities;
+    //TODO: possibly there's a better way to do the same...
+    getBlocks() {
+        return this.entities.filter(
+            entity => !(entity.isExit || entity.isEntry)
+        );
     }
 
-    getEntryPosition() {
-        const entry = this.entities.find(entity => entity.isEntry);
-        return entry ? { x: entry.x, y: entry.y } : null;
+    getEntry() {
+        return this.entities.find(entity => entity.isEntry);
+    }
+
+    getExit() {
+        return this.entities.find(entity => entity.isExit);
     }
 }

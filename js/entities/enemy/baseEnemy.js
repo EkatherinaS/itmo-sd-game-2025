@@ -11,14 +11,8 @@ export class BaseEnemy extends Enemy {
         this.slowCount = 4;
     }
 
-    fight(player) {
-        const hit = player.fight(
-            this.x,
-            this.y,
-            this.power,
-            this.width,
-            this.height
-        );
+    fight(player, positionLookup) {
+        const hit = player.fight(this, positionLookup);
         if (hit == 0) return false;
 
         this.hp -= hit;

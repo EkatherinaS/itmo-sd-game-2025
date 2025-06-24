@@ -15,20 +15,21 @@ export class EntityManager {
         this.experience = new Experience(this.player);
         this.bonuses = [];
         this.enemies = [];
+        this.isExitOpen = false;
     }
 
     getPlayer() {
         return this.player;
     }
 
-    getAllEntities() {
+    getMovableEntities() {
         return this.player
             .getEntities()
             .concat(this.enemies)
             .concat(this.bonuses);
     }
 
-    setEntities(map) {
+    #setEntities(map) {
         map.enemies.forEach(enemy => {
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
@@ -55,8 +56,10 @@ export class EntityManager {
         });
     }
 
-    setPositionLookup(positionLookup) {
-        this.positionLookup = positionLookup;
+    setLevelInfo(level) {
+        this.positionLookup = level.getPositionLookup();
+        this.exit = level.getExit();
+        this.#setEntities(level);
     }
 
     moveAll() {
@@ -67,7 +70,7 @@ export class EntityManager {
 
     checkCollide() {
         this.enemies.forEach(enemy => {
-            const hit = enemy.fight(this.player);
+            const hit = enemy.fight(this.player, this.positionLookup);
             if (hit) this.experience.updateHp();
         });
         this.enemies = this.enemies.filter(enemy => {
@@ -78,7 +81,7 @@ export class EntityManager {
         });
 
         this.bonuses.forEach(bonus => {
-            if (bonus.check(this.player)) {
+            if (bonus.check(this.player, this.positionLookup)) {
                 bonus.add(this.inventory);
                 this.experience.addExp(1);
             }
@@ -94,7 +97,15 @@ export class EntityManager {
         return this.experience;
     }
 
-    checkEndGame() {
+    isEndGame() {
         return !this.player.isAlive();
+    }
+
+    isLevelPassed() {
+        return this.enemies.length == 0;
+    }
+
+    isExitCollide() {
+        return this.positionLookup.checkCollide(this.player, this.exit);
     }
 }

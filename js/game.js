@@ -2,6 +2,7 @@ import { Renderer } from './renderer.js';
 import { EntityManager } from './entityManager.js';
 import { Controller } from './controller.js';
 import { Level } from './level/level.js';
+import * as CONST from './constants.js';
 
 export class Game {
     constructor(canvas, info) {
@@ -9,54 +10,86 @@ export class Game {
         const ctxInfo = info.getContext('2d');
 
         this.loop = this.loop.bind(this);
-
-        // this.level = Level.create(CONST.LEVEL_TYPES_TEST);
-        // this.level = Level.create(CONST.LEVEL_TYPES_RANDOM, null, 10);
-        this.level = Level.create(
-            CONST.LEVEL_TYPES_FROM_JSON,
-            '/itmo-sd-game-2025/levelMaps/levelFirst.json'
-        );
+        this.level = Level.create(CONST.LEVEL_TYPES_RANDOM);
 
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx, ctxInfo);
         this.controller = new Controller();
+
+        this.isRunning = false;
+        this.levelComplete = false;
     }
 
-    async start() {
+    async run() {
+        if (this.isRunning) return;
+
+        this.isRunning = true;
+        while (!this.entityManager.isEndGame() && this.isRunning) {
+            this.levelComplete = false;
+            await this.initLevel();
+            await this.runLevel();
+        }
+    }
+
+    async initLevel() {
         await this.level.init();
 
-        const positionLookup = this.level.getPositionLookup();
-        const map = this.level.getMap();
-        this.entityManager.setEntities(map);
-        this.entityManager.setPositionLookup(positionLookup);
-        this.controller.setEventListeners(this.entityManager, positionLookup);
-        const entryPos = this.level.getEntryPosition();
-        const spawnX = entryPos
-            ? entryPos.x - 4
+        this.entityManager.setLevelInfo(this.level);
+        this.controller.setEventListeners(
+            this.entityManager,
+            this.level.getPositionLookup()
+        );
+
+        const entry = this.level.getEntry();
+        const spawnX = entry
+            ? entry.x
             : Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;
-        const spawnY = entryPos
-            ? entryPos.y - 5
+        const spawnY = entry
+            ? entry.y
             : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
 
         this.entityManager.getPlayer().setCoords(spawnX, spawnY);
-        this.loop();
+    }
+
+    async runLevel() {
+        return new Promise(resolve => {
+            const gameLoop = () => {
+                if (this.levelComplete || !this.isRunning) {
+                    resolve();
+                    return;
+                }
+                this.loop();
+                requestAnimationFrame(gameLoop);
+            };
+            gameLoop();
+        });
     }
 
     loop() {
+        if (this.entityManager.isEndGame()) {
+            this.isRunning = false;
+        }
+
         this.entityManager.moveAll();
         this.entityManager.checkCollide();
-        //this.entityManager.checkEndGame();
-        //his.entityManager.checkNextLevel();
 
         const inventory = this.entityManager.getInventory();
         const experience = this.entityManager.getExperience();
-        const entities = this.entityManager.getAllEntities();
-        const map = this.level.getEntities();
+        const moving = this.entityManager.getMovableEntities();
+        const blocks = this.level.getBlocks();
+        const entry = this.level.getEntry();
+        let entities = blocks.concat([entry]).concat(moving);
+
+        if (this.entityManager.isLevelPassed()) {
+            const exit = this.level.getExit();
+            entities = entities.concat([exit]);
+
+            if (this.entityManager.isExitCollide()) {
+                this.levelComplete = true;
+            }
+        }
 
         this.renderer.renderEntities(entities);
         this.renderer.renderInfo(inventory.getItems(), experience.getItems());
-        this.renderer.renderMap(map);
-
-        requestAnimationFrame(this.loop);
     }
 }

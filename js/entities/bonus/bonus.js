@@ -7,8 +7,11 @@ export class Bonus extends Entity {
         this.alive = true;
     }
 
-    check(player) {
-        return false;
+    check(player, positionLookup) {
+        const eat = positionLookup.checkCollide(this, player);
+        if (!eat) return false;
+        this.alive = false;
+        return true;
     }
 
     add(inventory) {}

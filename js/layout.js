@@ -1,11 +1,25 @@
 import * as CONST from './constants.js';
 import { Game } from './game.js';
 
-function startGame() {
+let currentGame = null; // Track current game instance
+
+async function startGame() {
     startBtn.hidden = true;
-    audioPlayer.play();
-    game.start();
+    if (currentGame) {
+        currentGame = null;
+    }
+
+    currentGame = new Game(gameCanvas, infoCanvas);
+    audioPlayer.currentTime = 0;
+    await audioPlayer.play().catch(e => console.warn('Audio error:', e));
+    await currentGame.run();
+
+    startBtn.hidden = false;
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
 }
+
+// Rest of your setup code remains the same...
 
 const startBtn = document.getElementById('startButton');
 startBtn.addEventListener('click', startGame);
@@ -28,8 +42,3 @@ barLeft.height =
     (CONST.GAME_HEIGHT + CONST.INFO_ITEM_HEIGHT) * CONST.PIXEL_SIZE;
 BarRight.height =
     (CONST.GAME_HEIGHT + CONST.INFO_ITEM_HEIGHT) * CONST.PIXEL_SIZE;
-
-const game = new Game(gameCanvas, infoCanvas);
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();

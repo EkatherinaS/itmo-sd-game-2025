@@ -11,7 +11,7 @@ export class Player extends Actor {
         const x = Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;
         const y = Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
         const sprite = CONST.PLAYER_SPRITES[CONST.MOVE_DOWN][0];
-        super(sprite, x, y, CONST.LIGHT_HEIGHT, CONST.LIGHT_WIDTH, 0, 0, 0);
+        super(sprite, x, y, CONST.PLAYER_HEIGHT, CONST.PLAYER_WIDTH, 0, 0, 0);
 
         this.updateLvl(1);
 
@@ -24,28 +24,14 @@ export class Player extends Actor {
         this.setYellowLight();
     }
 
-    checkCollide(x, y, height, width) {
-        const xReal = this.x + (CONST.LIGHT_WIDTH - CONST.PLAYER_WIDTH) / 2;
-        const yReal = this.y + (CONST.LIGHT_HEIGHT - CONST.PLAYER_HEIGHT) / 2;
-        return (
-            (xReal <= x + width &&
-                xReal >= x - width &&
-                yReal <= y + height &&
-                yReal >= y - height) ||
-            (x <= xReal + CONST.PLAYER_WIDTH &&
-                x >= xReal - CONST.PLAYER_WIDTH &&
-                y <= yReal + CONST.PLAYER_HEIGHT &&
-                y >= yReal - CONST.PLAYER_HEIGHT)
-        );
-    }
-
-    fight(x, y, power, width, height) {
-        if (this.checkCollide(x, y, height, width)) {
-            this.hp = Math.max(this.hp - power, 0);
+    fight(enemy, positionLookup) {
+        const collide = positionLookup.checkCollide(this, enemy);
+        if (collide) {
+            this.hp = Math.max(this.hp - enemy.power, 0);
         }
         if (
-            Math.abs(x - (this.x + this.width / 2)) ** 2 +
-                Math.abs(y - (this.y + this.height / 2)) ** 2 <
+            Math.abs(enemy.x - (this.x + this.width / 2)) ** 2 +
+                Math.abs(enemy.y - (this.y + this.height / 2)) ** 2 <
             this.armor ** 2
         ) {
             return this.power + this.light.power;
@@ -105,5 +91,6 @@ export class Player extends Actor {
     setCoords(input_x, input_y) {
         this.x = input_x;
         this.y = input_y;
+        this.updateLight();
     }
 }

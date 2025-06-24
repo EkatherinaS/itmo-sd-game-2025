@@ -3,6 +3,7 @@ import { CommandFactory } from './commands/commandFactory.js';
 
 export class Controller {
     constructor() {
+        this.isSetUp = false;
         this.commands = {
             use: null,
             changeActive: null,
@@ -14,7 +15,19 @@ export class Controller {
         };
     }
 
+    #resetCommands(positionLookup) {
+        this.commands['up'].resetPositionLookup(positionLookup);
+        this.commands['down'].resetPositionLookup(positionLookup);
+        this.commands['left'].resetPositionLookup(positionLookup);
+        this.commands['right'].resetPositionLookup(positionLookup);
+    }
+
     setEventListeners(entityManager, positionLookup) {
+        if (this.isSetUp) {
+            this.#resetCommands(positionLookup);
+            return;
+        }
+
         const commandFactory = new CommandFactory(
             entityManager,
             positionLookup
@@ -44,5 +57,7 @@ export class Controller {
             else if (CONST.KEY_ITEM_3.includes(e.key))
                 this.commands.yellow?.invoke();
         });
+
+        this.isSetUp = true;
     }
 }

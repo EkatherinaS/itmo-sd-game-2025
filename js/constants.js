@@ -12,6 +12,16 @@ export const BONUS_HEIGHT = 8;
 export const ENEMY_WIDTH = 8;
 export const ENEMY_HEIGHT = 8;
 
+export const LIGHT_WIDTH = 16;
+export const LIGHT_HEIGHT = 16;
+
+export const BLOCK_WIDTH = 8;
+export const BLOCK_HEIGHT = 8;
+
+export const STEP = 2;
+
+//TODO: align to difficulty or do smth with it to make the game playable
+
 export const ENEMY_LEECH_HP = 40;
 export const ENEMY_LEECH_POWER = 10;
 export const ENEMY_LEECH_ARMOR = 0;
@@ -31,27 +41,19 @@ export const PLAYER_HP_MOD = 10;
 export const PLAYER_POWER_MOD = 2;
 export const PLAYER_ARMOR_MIN = 15;
 
-export const LIGHT_WIDTH = 16;
-export const LIGHT_HEIGHT = 16;
-
-export const BLOCK_WIDTH = 8;
-export const BLOCK_HEIGHT = 8;
-
-export const STEP = 2;
-
 export const W_CODE = 87;
 export const A_CODE = 65;
 export const S_CODE = 83;
 export const D_CODE = 68;
 
-export const KEY_ITEM_1 = ['1'];
-export const KEY_ITEM_2 = ['2'];
-export const KEY_ITEM_3 = ['3'];
+export const KEY_ITEM_1 = ['q', 'Q', 'й', 'Й'];
+export const KEY_ITEM_2 = ['w', 'W', 'ц', 'Ц'];
+export const KEY_ITEM_3 = ['e', 'E', 'у', 'У'];
 
-export const KEY_UP = ['ц', 'Ц', 'w', 'W', 'ArrowUp'];
-export const KEY_DOWN = ['ы', 'Ы', 's', 'S', 'ArrowDown'];
-export const KEY_LEFT = ['ф', 'Ф', 'a', 'A', 'ArrowLeft'];
-export const KEY_RIGHT = ['в', 'В', 'd', 'D', 'ArrowRight'];
+export const KEY_UP = ['ArrowUp'];
+export const KEY_DOWN = ['ArrowDown'];
+export const KEY_LEFT = ['ArrowLeft'];
+export const KEY_RIGHT = ['ArrowRight'];
 
 export const GREEN_MUSHROOM = 'green_mushroom';
 export const BLUE_MUSHROOM = 'blue_mushroom';
