@@ -101,4 +101,9 @@ export class Player extends Actor {
             CONST.PLAYER_ARMOR_MIN
         );
     }
+
+    setCoords(input_x, input_y) {
+        this.x = input_x;
+        this.y = input_y;
+    }
 }
