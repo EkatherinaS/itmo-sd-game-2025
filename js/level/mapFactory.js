@@ -1,5 +1,8 @@
 import * as CONST from '../constants.js';
 import { Entity } from '../entities/entity.js';
+import { Block } from '../entities/environment/block.js';
+import { EntryPoint } from '../entities/environment/entryPoint.js';
+import { ExitPoint } from '../entities/environment/exitPoint.js';
 
 export class MapFactory {
     async createFromJSON(filePath) {
@@ -20,332 +23,107 @@ export class MapFactory {
 
     #parseJSONData(data) {
         const entities = [];
-        if (data.entities && Array.isArray(data.entities)) {
-            data.entities.forEach(entityData => {
-                const entity = new Entity(
-                    entityData.image,
-                    entityData.x,
-                    entityData.y,
-                    entityData.width || CONST.BLOCK_WIDTH,
-                    entityData.height || CONST.BLOCK_HEIGHT
-                );
-                entity.type = entityData.type;
-                entities.push(entity);
-            });
+
+        if (!data.entities || !Array.isArray(data.entities)) {
+            return entities;
         }
+
+        data.entities.forEach(entityData => {
+            let entity;
+
+            switch(entityData.type) {
+                case 'block':
+                    entity = new Block(
+                        entityData.x,
+                        entityData.y,
+                        entityData.width || CONST.BLOCK_WIDTH,
+                        entityData.height || CONST.BLOCK_HEIGHT
+                    );
+                    break;
+
+                case 'entry':
+                    entity = new EntryPoint(
+                        entityData.x,
+                        entityData.y,
+                        entityData.width || CONST.BLOCK_HEIGHT,
+                        entityData.height || CONST.BLOCK_HEIGHT
+                    );
+                    break;
+
+                case 'exit':
+                    entity = new ExitPoint(
+                        entityData.x,
+                        entityData.y,
+                        entityData.width || CONST.BLOCK_HEIGHT,
+                        entityData.height || CONST.BLOCK_HEIGHT
+                    );
+                    break;
+
+                case 'enemy':
+                    entity = new Enemy(
+                        entityData.image,
+                        entityData.x,
+                        entityData.y,
+                        entityData.hp || 100,
+                        entityData.attack || 10,
+                        entityData.armor || 2
+                    );
+                    break;
+
+                default:
+                    console.warn(`Unknown entity type: ${entityData.type}`);
+                    return;
+            }
+
+            if (entityData.customProps) {
+                Object.assign(entity, entityData.customProps);
+            }
+
+            entities.push(entity);
+        });
+
         return entities;
     }
 
-    //Placeholder data
     getTestData() {
-        const entities = [];
-        entities.push(
-            new Entity(
-                'block.svg',
-                5,
-                5,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                70,
-                72,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                25,
-                42,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'entry.svg',
-                20,
-                84,
-                CONST.BLOCK_HEIGHT,
-                CONST.BLOCK_HEIGHT,
-                'entry'
-            )
-        );
-        entities.push(
-            new Entity(
-                'exit.svg',
-                120,
-                100,
-                CONST.BLOCK_HEIGHT,
-                CONST.BLOCK_HEIGHT,
-                'exit'
-            )
-        );
+        return [
+        new Block(5, 5),
+        new Block(70, 72),
+        new Block(25, 42),
 
-        entities.push(
-            new Entity(
-                'block.svg',
-                30,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                40,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                40,
-                10,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                40,
-                20,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                40,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                50,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
+        new EntryPoint(20, 84),
+        new ExitPoint(120, 100),
 
-        entities.push(
-            new Entity(
-                'block.svg',
-                70,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                70,
-                10,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                80,
-                10,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                70,
-                20,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                70,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                80,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                80,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
+        new Block(30, 0),
+        new Block(40, 0),
+        new Block(40, 10),
+        new Block(40, 20),
+        new Block(40, 30),
+        new Block(50, 0),
 
-        entities.push(
-            new Entity(
-                'block.svg',
-                100,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                100,
-                10,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                100,
-                20,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                100,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                110,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                110,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
+        new Block(70, 0),
+        new Block(70, 10),
+        new Block(80, 10),
+        new Block(70, 20),
+        new Block(70, 30),
+        new Block(80, 0),
+        new Block(80, 30),
 
-        entities.push(
-            new Entity(
-                'block.svg',
-                130,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                140,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                140,
-                10,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                140,
-                20,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                140,
-                30,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
-        entities.push(
-            new Entity(
-                'block.svg',
-                150,
-                0,
-                CONST.BLOCK_WIDTH,
-                CONST.BLOCK_HEIGHT,
-                'block'
-            )
-        );
+        new Block(100, 0),
+        new Block(100, 10),
+        new Block(100, 20),
+        new Block(100, 30),
+        new Block(110, 0),
+        new Block(110, 30),
 
-        return entities;
-    }
+        new Block(130, 0),
+        new Block(140, 0),
+        new Block(140, 10),
+        new Block(140, 20),
+        new Block(140, 30),
+        new Block(150, 0)
+    ];
+}
 
     #placeSpecialEntity(
         entities,
@@ -362,18 +140,21 @@ export class MapFactory {
         const minSpacing = 2;
 
         do {
-            newEntity = new Entity(
-                image,
-                Math.floor(
-                    Math.random() * (xMax - xMin - CONST.BLOCK_HEIGHT) + xMin
-                ),
-                Math.floor(
-                    Math.random() * (yMax - yMin - CONST.BLOCK_HEIGHT) + yMin
-                ),
-                CONST.BLOCK_HEIGHT,
-                CONST.BLOCK_HEIGHT,
-                image.includes('entry') ? 'entry' : 'exit'
+            const x = Math.floor(
+                Math.random() * (xMax - xMin - CONST.BLOCK_HEIGHT) + xMin
             );
+            const y = Math.floor(
+                Math.random() * (yMax - yMin - CONST.BLOCK_HEIGHT) + yMin
+            );
+
+            if (image.includes('entry')) {
+                newEntity = new EntryPoint(x, y);
+            } else if (image.includes('exit')) {
+                newEntity = new ExitPoint(x, y);
+            } else {
+                console.error(`Unknown special entity image: ${image}`);
+                return null;
+            }
 
             hasCollision = this.#checkCollision(
                 newEntity,
@@ -384,7 +165,7 @@ export class MapFactory {
 
             if (attempts >= maxAttempts) {
                 console.error(
-                    `Не удалось разместить ${image} после максимального количества попыток`
+                    `Не удалось разместить ${image} после ${maxAttempts} попыток`
                 );
                 return null;
             }
@@ -411,9 +192,8 @@ export class MapFactory {
     }
 
     createRandom(difficulty = 1) {
-        if (difficulty > 10) {
-            difficulty = 10;
-        }
+        difficulty = Math.min(difficulty, 10);
+
         const entities = [];
         const blockCount = 5 + difficulty * 3;
         const maxAttempts = 100;
@@ -421,61 +201,41 @@ export class MapFactory {
 
         for (let i = 0; i < blockCount; i++) {
             let attempts = 0;
-            let newEntity;
+            let newBlock;
             let hasCollision;
 
             do {
-                newEntity = new Entity(
-                    'block.svg',
-                    Math.floor(
-                        Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_WIDTH)
-                    ),
-                    Math.floor(
-                        Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
-                    ),
-                    CONST.BLOCK_WIDTH,
-                    CONST.BLOCK_HEIGHT,
-                    'block'
+                const x = Math.floor(
+                    Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_WIDTH)
+                );
+                const y = Math.floor(
+                    Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
                 );
 
+                newBlock = new Block(x, y);
+
                 hasCollision = this.#checkCollision(
-                    newEntity,
+                    newBlock,
                     entities,
                     minSpacing
                 );
                 attempts++;
 
                 if (attempts >= maxAttempts) {
-                    console.warn(
-                        'Не удалось разместить блок после максимального количества попыток'
-                    );
+                    console.warn('Не удалось разместить блок после максимального количества попыток');
                     break;
                 }
             } while (hasCollision);
 
-            if (attempts < maxAttempts) {
-                entities.push(newEntity);
+            if (!hasCollision) {
+                entities.push(newBlock);
             }
         }
 
-        const entry = this.#placeSpecialEntity(
-            entities,
-            'entry.svg',
-            0,
-            50,
-            0,
-            50
-        );
+        const entry = new EntryPoint(50, 50);
         if (entry) entities.push(entry);
 
-        const exit = this.#placeSpecialEntity(
-            entities,
-            'exit.svg',
-            70,
-            120,
-            70,
-            120
-        );
+        const exit = new ExitPoint(120, 100);
         if (exit) entities.push(exit);
 
         return entities;

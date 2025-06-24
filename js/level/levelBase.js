@@ -55,7 +55,7 @@ export class LevelBase {
     }
 
     getEntryPosition() {
-        const entry = this.entities.find(entity => entity.type === 'entry');
+        const entry = this.entities.find(entity => entity.isEntry);
         return entry ? { x: entry.x, y: entry.y } : null;
     }
 }
