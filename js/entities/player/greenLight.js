@@ -6,6 +6,8 @@ export class GreenLight extends Light {
         const sprite = CONST.LIGHT_SPRITES.green;
         super(sprite, x, y);
 
-        this.power = 1;
+        this.armor = 5;
+        this.power = 5;
+        this.duration = 5000;
     }
 }

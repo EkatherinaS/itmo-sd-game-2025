@@ -30,10 +30,26 @@ body {
 }
 
 #game {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+#layout {
+    height: 100%;
+    width: auto;
+    max-height: 90vh;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 canvas {
@@ -45,8 +61,8 @@ canvas {
     background-color: #222034;
 
     image-rendering: pixelated;
-
-    height: 90vh;
+    height: 100%;
+    max-height: 90vh;
     aspect-ratio: 500/ 375;
     max-height: 90vh;
     max-width: calc(90vh * (500 / 375));

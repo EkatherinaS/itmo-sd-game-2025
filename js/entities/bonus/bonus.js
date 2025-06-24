@@ -11,6 +11,8 @@ export class Bonus extends Entity {
         return false;
     }
 
+    add(inventory) {}
+
     isAlive() {
         return this.alive;
     }

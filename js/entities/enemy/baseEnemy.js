@@ -19,10 +19,11 @@ export class BaseEnemy extends Enemy {
             this.width,
             this.height
         );
-        if (hit == 0) return;
+        if (hit == 0) return false;
 
         this.hp -= hit;
         this.state = new StatePanic(this);
+        return true;
     }
 
     move(positionLookup, player) {

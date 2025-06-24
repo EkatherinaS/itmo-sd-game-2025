@@ -6,6 +6,8 @@ export class YellowLight extends Light {
         const sprite = CONST.LIGHT_SPRITES.yellow;
         super(sprite, x, y);
 
+        this.armor = 0;
         this.power = 0;
+        this.duration = 0;
     }
 }

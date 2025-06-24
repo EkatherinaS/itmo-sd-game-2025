@@ -2,7 +2,8 @@ import * as CONST from '../../constants.js';
 
 import { Actor } from '../actor.js';
 import { GreenLight } from './greenLight.js';
-import { PinkLight } from './pinkLight.js';
+import { BlueLight } from './blueLight.js';
+import { PurpleLight } from './purpleLight.js';
 import { YellowLight } from './yellowLight.js';
 
 export class Player extends Actor {
@@ -10,21 +11,15 @@ export class Player extends Actor {
         const x = Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;
         const y = Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
         const sprite = CONST.PLAYER_SPRITES[CONST.MOVE_DOWN][0];
-        super(
-            sprite,
-            x,
-            y,
-            CONST.LIGHT_HEIGHT,
-            CONST.LIGHT_WIDTH,
-            CONST.PLAYER_INIT_HP,
-            CONST.PLAYER_INIT_POWER,
-            CONST.PLAYER_INIT_ARMOR
-        );
+        super(sprite, x, y, CONST.LIGHT_HEIGHT, CONST.LIGHT_WIDTH, 0, 0, 0);
+
+        this.updateLvl(1);
 
         this.lights = {
-            green: new GreenLight(),
-            pink: new PinkLight(),
             yellow: new YellowLight(),
+            green: new GreenLight(),
+            blue: new BlueLight(),
+            purple: new PurpleLight(),
         };
         this.setYellowLight();
     }
@@ -53,7 +48,6 @@ export class Player extends Actor {
                 Math.abs(y - (this.y + this.height / 2)) ** 2 <
             this.armor ** 2
         ) {
-            this.armor += 0.1;
             return this.power + this.light.power;
         }
         return 0;
@@ -61,8 +55,13 @@ export class Player extends Actor {
 
     updateLight() {
         if (this.light != null) {
-            this.light.setSize(this.armor);
+            this.light.setSize(this.armor + this.light.armor);
             this.light.move(this.x + this.width / 2, this.y + this.height / 2);
+            if (this.light.duration > 0) {
+                setTimeout(() => {
+                    this.setYellowLight();
+                }, this.light.duration);
+            }
         }
     }
 
@@ -73,18 +72,29 @@ export class Player extends Actor {
         return [this];
     }
 
+    setYellowLight() {
+        this.light = this.lights.yellow;
+        this.updateLight();
+    }
+
     setGreenLight() {
         this.light = this.lights.green;
         this.updateLight();
     }
 
-    setPinkLight() {
-        this.light = this.lights.pink;
+    setBlueLight() {
+        this.light = this.lights.blue;
         this.updateLight();
     }
 
-    setYellowLight() {
-        this.light = this.lights.yellow;
+    setPurpleight() {
+        this.light = this.lights.purple;
         this.updateLight();
+    }
+
+    updateLvl(lvl) {
+        this.power = lvl * 1;
+        this.hp = lvl * 10;
+        this.armor = Math.max(lvl * 5, 15);
     }
 }

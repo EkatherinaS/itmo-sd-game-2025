@@ -1,9 +1,9 @@
 import * as CONST from '../../constants.js';
 import { Bonus } from './bonus.js';
 
-export class MushroomPink extends Bonus {
+export class MushroomBlue extends Bonus {
     constructor(x, y) {
-        const sprite = CONST.MUSHROOM_SPRITES.pink;
+        const sprite = CONST.MUSHROOM_SPRITES.blue;
         super(sprite, x, y);
     }
 
@@ -15,8 +15,11 @@ export class MushroomPink extends Bonus {
             this.height
         );
         if (!eat) return false;
-        player.setPinkLight();
         this.alive = false;
         return true;
+    }
+
+    add(inventory) {
+        inventory.addBlueMushroom();
     }
 }

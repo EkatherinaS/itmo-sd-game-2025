@@ -3,6 +3,9 @@ export const PIXEL_SIZE = 4;
 export const GAME_WIDTH = 160;
 export const GAME_HEIGHT = 120;
 
+export const INFO_ITEM_WIDTH = 12;
+export const INFO_ITEM_HEIGHT = 12;
+
 export const ENEMY_WIDTH = 8;
 export const ENEMY_HEIGHT = 8;
 
@@ -23,9 +26,6 @@ export const ENEMY_SLUG_ARMOR = 0;
 
 export const PLAYER_WIDTH = 8;
 export const PLAYER_HEIGHT = 8;
-export const PLAYER_INIT_HP = 100;
-export const PLAYER_INIT_POWER = 5;
-export const PLAYER_INIT_ARMOR = 20;
 
 export const LIGHT_WIDTH = 16;
 export const LIGHT_HEIGHT = 16;
@@ -40,10 +40,18 @@ export const A_CODE = 65;
 export const S_CODE = 83;
 export const D_CODE = 68;
 
+export const KEY_ITEM_1 = ['1'];
+export const KEY_ITEM_2 = ['2'];
+export const KEY_ITEM_3 = ['3'];
+
 export const KEY_UP = ['w', 'W', 'ArrowUp'];
 export const KEY_DOWN = ['s', 'S', 'ArrowDown'];
 export const KEY_LEFT = ['a', 'A', 'ArrowLeft'];
 export const KEY_RIGHT = ['d', 'D', 'ArrowRight'];
+
+export const GREEN_MUSHROOM = 'green_mushroom';
+export const BLUE_MUSHROOM = 'blue_mushroom';
+export const PURPLE_MUSHROOM = 'purple_mushroom';
 
 export const MOVE_LEFT = 'left';
 export const MOVE_RIGHT = 'right';
@@ -57,7 +65,8 @@ export const IMAGES = [
     'exit.svg',
     'debug.svg',
     'lumen/light-green.svg',
-    'lumen/light-pink.svg',
+    'lumen/light-blue.svg',
+    'lumen/light-purple.svg',
     'lumen/light-yellow.svg',
     'lumen/lumen-left1.svg',
     'lumen/lumen-left2.svg',
@@ -96,20 +105,30 @@ export const IMAGES = [
     'shadow/slug7.svg',
     'shadow/slug8.svg',
     'mushroom-green.svg',
-    'mushroom-yellow.svg',
-    'mushroom-pink.svg',
+    'mushroom-purple.svg',
+    'mushroom-blue.svg',
+    'hp.svg',
+    'lvl.svg',
+    'exp.svg',
 ];
 
 export const LIGHT_SPRITES = {
     green: 'lumen/light-green.svg',
     yellow: 'lumen/light-yellow.svg',
-    pink: 'lumen/light-pink.svg',
+    blue: 'lumen/light-blue.svg',
+    purple: 'lumen/light-purple.svg',
 };
 
 export const MUSHROOM_SPRITES = {
     green: 'mushroom-green.svg',
-    yellow: 'mushroom-yellow.svg',
-    pink: 'mushroom-pink.svg',
+    purple: 'mushroom-purple.svg',
+    blue: 'mushroom-blue.svg',
+};
+
+export const INFO_SPRITES = {
+    hp: 'hp.svg',
+    lvl: 'lvl.svg',
+    exp: 'exp.svg',
 };
 
 export const PLAYER_SPRITES = {

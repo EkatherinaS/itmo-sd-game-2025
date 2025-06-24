@@ -1,14 +1,18 @@
 import { Leech } from './entities/enemy/leech.js';
 import { Orb } from './entities/enemy/orb.js';
 import { Slug } from './entities/enemy/slug.js';
-import { MushroomGreen } from './entities/item/mushroomGreen.js';
-import { MushroomPink } from './entities/item/mushroomPink.js';
-import { MushroomYellow } from './entities/item/mushroomYellow.js';
+import { MushroomGreen } from './entities/bonus/mushroomGreen.js';
+import { MushroomBlue } from './entities/bonus/mushroomBlue.js';
+import { MushroomPurple } from './entities/bonus/mushroomPurple.js';
 import { Player } from './entities/player/player.js';
+import { Inventory } from './info/inventory.js';
+import { Experience } from './info/experience.js';
 
 export class EntityManager {
     constructor() {
         this.player = new Player();
+        this.inventory = new Inventory();
+        this.experience = new Experience(this.player);
         this.bonuses = [];
         this.enemies = [];
     }
@@ -43,10 +47,10 @@ export class EntityManager {
                     this.bonuses.push(new MushroomGreen(bonus.x, bonus.y));
                     break;
                 case 1:
-                    this.bonuses.push(new MushroomPink(bonus.x, bonus.y));
+                    this.bonuses.push(new MushroomBlue(bonus.x, bonus.y));
                     break;
                 default:
-                    this.bonuses.push(new MushroomYellow(bonus.x, bonus.y));
+                    this.bonuses.push(new MushroomPurple(bonus.x, bonus.y));
             }
         });
     }
@@ -63,16 +67,34 @@ export class EntityManager {
 
     checkCollide() {
         this.enemies.forEach(enemy => {
-            enemy.fight(this.player);
+            const hit = enemy.fight(this.player);
+            if (hit) this.experience.updateHp();
         });
+        this.enemies = this.enemies.filter(enemy => {
+            if (!enemy.isAlive()) {
+                this.experience.addExp(2);
+            }
+            return enemy.isAlive();
+        });
+
         this.bonuses.forEach(bonus => {
-            bonus.check(this.player);
+            if (bonus.check(this.player)) {
+                bonus.add(this.inventory);
+                this.experience.addExp(1);
+            }
         });
-        this.enemies = this.enemies.filter(enemy => enemy.isAlive());
         this.bonuses = this.bonuses.filter(bonus => bonus.isAlive());
     }
 
+    getInventory() {
+        return this.inventory;
+    }
+
+    getExperience() {
+        return this.experience;
+    }
+
     checkEndGame() {
-        return this.player.isAlive();
+        return !this.player.isAlive();
     }
 }
