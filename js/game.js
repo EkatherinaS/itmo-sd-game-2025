@@ -11,7 +11,10 @@ class Game {
 
         // this.level = Level.create(CONST.LEVEL_TYPES_TEST);
         // this.level = Level.create(CONST.LEVEL_TYPES_RANDOM, null, 10);
-        this.level = Level.create(CONST.LEVEL_TYPES_FROM_JSON, "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+        this.level = Level.create(
+            CONST.LEVEL_TYPES_FROM_JSON,
+            '/itmo-sd-game-2025/levelMaps/levelFirst.json'
+        );
 
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);
