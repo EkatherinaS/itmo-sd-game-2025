@@ -193,16 +193,59 @@ export class MapFactory {
 
     createRandom(difficulty = 1) {
         difficulty = Math.min(difficulty, 10);
-
         const entities = [];
-        const blockCount = 5 + difficulty * 3;
-        const maxAttempts = 100;
         const minSpacing = 2;
+        const minEntryExitDistanceX = CONST.GAME_WIDTH / 2;
+        const minEntryExitDistanceY = CONST.GAME_HEIGHT / 2;
+
+        let entry, exit;
+        let attempts = 0;
+        const maxPlacementAttempts = 50;
+
+        do {
+            if (entry) entities.pop();
+            if (exit) entities.pop();
+
+            const entryX = Math.floor(
+                Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_HEIGHT)
+            );
+            const entryY = Math.floor(
+                Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
+            );
+
+            const exitX = Math.floor(
+                Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_HEIGHT)
+            );
+            const exitY = Math.floor(
+                Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
+            );
+
+            entry = new EntryPoint(entryX, entryY);
+            exit = new ExitPoint(exitX, exitY);
+
+            attempts++;
+
+            if (attempts >= maxPlacementAttempts) {
+                throw new Error(
+                    'Не удалось разместить вход и выход с требуемым расстоянием'
+                );
+            }
+        } while (
+            Math.abs(entry.x - exit.x) < minEntryExitDistanceX ||
+            Math.abs(entry.y - exit.y) < minEntryExitDistanceY ||
+            this.#checkCollision(entry, entities, minSpacing) ||
+            this.#checkCollision(exit, entities, minSpacing)
+        );
+
+        entities.push(entry, exit);
+
+        const blockCount = 5 + difficulty * 3;
+        const maxBlockAttempts = 100;
 
         for (let i = 0; i < blockCount; i++) {
-            let attempts = 0;
             let newBlock;
             let hasCollision;
+            let blockAttempts = 0;
 
             do {
                 const x = Math.floor(
@@ -213,15 +256,14 @@ export class MapFactory {
                 );
 
                 newBlock = new Block(x, y);
-
                 hasCollision = this.#checkCollision(
                     newBlock,
                     entities,
                     minSpacing
                 );
-                attempts++;
+                blockAttempts++;
 
-                if (attempts >= maxAttempts) {
+                if (blockAttempts >= maxBlockAttempts) {
                     console.warn(
                         'Не удалось разместить блок после максимального количества попыток'
                     );
@@ -233,12 +275,6 @@ export class MapFactory {
                 entities.push(newBlock);
             }
         }
-
-        const entry = new EntryPoint(50, 50);
-        if (entry) entities.push(entry);
-
-        const exit = new ExitPoint(120, 100);
-        if (exit) entities.push(exit);
 
         return entities;
     }
