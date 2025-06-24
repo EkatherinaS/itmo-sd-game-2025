@@ -8,4 +8,9 @@ export class Player extends Actor {
         const sprite = CONST.PLAYER_SPRITES[CONST.MOVE_DOWN][0];
         super(sprite, x, y, CONST.LIGHT_HEIGHT, CONST.LIGHT_WIDTH);
     }
+
+    setCoords(input_x, input_y) {
+        this.x = input_x;
+        this.y = input_y;
+    }
 }

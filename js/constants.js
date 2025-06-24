@@ -103,6 +103,10 @@ export const PLAYER_SPRITES = {
     ],
 };
 
+export const LEVEL_TYPES_RANDOM = 'random';
+export const LEVEL_TYPES_FROM_JSON = 'fromJSON';
+export const LEVEL_TYPES_TEST = 'test';
+
 export const ENEMY_SPRITES = {
     orb: [
         'shadow/orb1.svg',

@@ -1,0 +1,28 @@
+{
+    "entities": [
+        {
+            "image": "block.svg",
+            "x": 5,
+            "y": 5,
+            "type": "block"
+        },
+        {
+            "image": "block.svg",
+            "x": 50,
+            "y": 50,
+            "type": "block"
+        },
+        {
+            "image": "entry.svg",
+            "x": 20,
+            "y": 84,
+            "type": "entry"
+        },
+        {
+            "image": "exit.svg",
+            "x": 120,
+            "y": 100,
+            "type": "exit"
+        }
+    ]
+}
