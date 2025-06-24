@@ -198,46 +198,73 @@ export class MapFactory {
         const minEntryExitDistanceX = CONST.GAME_WIDTH / 2;
         const minEntryExitDistanceY = CONST.GAME_HEIGHT / 2;
 
-        let entry, exit;
-        let attempts = 0;
-        const maxPlacementAttempts = 50;
+        const maxGlobalAttempts = 3;
+        let globalAttempts = 0;
+        let success = false;
 
-        do {
-            if (entry) entities.pop();
-            if (exit) entities.pop();
+        while (!success && globalAttempts < maxGlobalAttempts) {
+            try {
+                let entry, exit;
+                let placementAttempts = 0;
+                const maxPlacementAttempts = 50;
 
-            const entryX = Math.floor(
-                Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_HEIGHT)
-            );
-            const entryY = Math.floor(
-                Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
-            );
+                do {
+                    if (entry) entities.pop();
+                    if (exit) entities.pop();
 
-            const exitX = Math.floor(
-                Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_HEIGHT)
-            );
-            const exitY = Math.floor(
-                Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
-            );
+                    const entryX = Math.floor(
+                        minSpacing +
+                            Math.random() *
+                                (CONST.GAME_WIDTH -
+                                    CONST.BLOCK_HEIGHT -
+                                    minSpacing * 2)
+                    );
+                    const entryY = Math.floor(
+                        minSpacing +
+                            Math.random() *
+                                (CONST.GAME_HEIGHT -
+                                    CONST.BLOCK_HEIGHT -
+                                    minSpacing * 2)
+                    );
 
-            entry = new EntryPoint(entryX, entryY);
-            exit = new ExitPoint(exitX, exitY);
+                    const exitX = Math.floor(
+                        Math.random() * (CONST.GAME_WIDTH - CONST.BLOCK_HEIGHT)
+                    );
+                    const exitY = Math.floor(
+                        Math.random() * (CONST.GAME_HEIGHT - CONST.BLOCK_HEIGHT)
+                    );
 
-            attempts++;
+                    entry = new EntryPoint(entryX, entryY);
+                    exit = new ExitPoint(exitX, exitY);
 
-            if (attempts >= maxPlacementAttempts) {
-                throw new Error(
-                    'Не удалось разместить вход и выход с требуемым расстоянием'
+                    placementAttempts++;
+
+                    if (placementAttempts >= maxPlacementAttempts) {
+                        throw new Error('Не удалось разместить вход и выход');
+                    }
+                } while (
+                    Math.abs(entry.x - exit.x) < minEntryExitDistanceX ||
+                    Math.abs(entry.y - exit.y) < minEntryExitDistanceY ||
+                    this.#checkCollision(entry, entities, minSpacing) ||
+                    this.#checkCollision(exit, entities, minSpacing)
                 );
-            }
-        } while (
-            Math.abs(entry.x - exit.x) < minEntryExitDistanceX ||
-            Math.abs(entry.y - exit.y) < minEntryExitDistanceY ||
-            this.#checkCollision(entry, entities, minSpacing) ||
-            this.#checkCollision(exit, entities, minSpacing)
-        );
 
-        entities.push(entry, exit);
+                entities.push(entry, exit);
+                success = true;
+            } catch (error) {
+                console.warn(
+                    `Попытка ${globalAttempts + 1} не удалась: ${error.message}`
+                );
+                entities.length = 0;
+                globalAttempts++;
+            }
+        }
+
+        if (!success) {
+            throw new Error(
+                `Не удалось создать уровень после ${maxGlobalAttempts} попыток`
+            );
+        }
 
         const blockCount = 5 + difficulty * 3;
         const maxBlockAttempts = 100;
@@ -264,9 +291,7 @@ export class MapFactory {
                 blockAttempts++;
 
                 if (blockAttempts >= maxBlockAttempts) {
-                    console.warn(
-                        'Не удалось разместить блок после максимального количества попыток'
-                    );
+                    console.warn('Не удалось разместить блок');
                     break;
                 }
             } while (hasCollision);
