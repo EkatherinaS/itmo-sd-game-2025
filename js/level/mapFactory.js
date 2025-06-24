@@ -31,7 +31,7 @@ export class MapFactory {
         data.entities.forEach(entityData => {
             let entity;
 
-            switch(entityData.type) {
+            switch (entityData.type) {
                 case 'block':
                     entity = new Block(
                         entityData.x,
@@ -87,43 +87,43 @@ export class MapFactory {
 
     getTestData() {
         return [
-        new Block(5, 5),
-        new Block(70, 72),
-        new Block(25, 42),
+            new Block(5, 5),
+            new Block(70, 72),
+            new Block(25, 42),
 
-        new EntryPoint(20, 84),
-        new ExitPoint(120, 100),
+            new EntryPoint(20, 84),
+            new ExitPoint(120, 100),
 
-        new Block(30, 0),
-        new Block(40, 0),
-        new Block(40, 10),
-        new Block(40, 20),
-        new Block(40, 30),
-        new Block(50, 0),
+            new Block(30, 0),
+            new Block(40, 0),
+            new Block(40, 10),
+            new Block(40, 20),
+            new Block(40, 30),
+            new Block(50, 0),
 
-        new Block(70, 0),
-        new Block(70, 10),
-        new Block(80, 10),
-        new Block(70, 20),
-        new Block(70, 30),
-        new Block(80, 0),
-        new Block(80, 30),
+            new Block(70, 0),
+            new Block(70, 10),
+            new Block(80, 10),
+            new Block(70, 20),
+            new Block(70, 30),
+            new Block(80, 0),
+            new Block(80, 30),
 
-        new Block(100, 0),
-        new Block(100, 10),
-        new Block(100, 20),
-        new Block(100, 30),
-        new Block(110, 0),
-        new Block(110, 30),
+            new Block(100, 0),
+            new Block(100, 10),
+            new Block(100, 20),
+            new Block(100, 30),
+            new Block(110, 0),
+            new Block(110, 30),
 
-        new Block(130, 0),
-        new Block(140, 0),
-        new Block(140, 10),
-        new Block(140, 20),
-        new Block(140, 30),
-        new Block(150, 0)
-    ];
-}
+            new Block(130, 0),
+            new Block(140, 0),
+            new Block(140, 10),
+            new Block(140, 20),
+            new Block(140, 30),
+            new Block(150, 0),
+        ];
+    }
 
     #placeSpecialEntity(
         entities,
@@ -222,7 +222,9 @@ export class MapFactory {
                 attempts++;
 
                 if (attempts >= maxAttempts) {
-                    console.warn('Не удалось разместить блок после максимального количества попыток');
+                    console.warn(
+                        'Не удалось разместить блок после максимального количества попыток'
+                    );
                     break;
                 }
             } while (hasCollision);

@@ -1,4 +1,8 @@
-import { LEVEL_TYPES_TEST, LEVEL_TYPES_RANDOM, LEVEL_TYPES_FROM_JSON} from '../constants.js';
+import {
+    LEVEL_TYPES_TEST,
+    LEVEL_TYPES_RANDOM,
+    LEVEL_TYPES_FROM_JSON,
+} from '../constants.js';
 import { LevelRandom } from './levelRandom.js';
 import { LevelFromJSON } from './levelFromJSON.js';
 import { LevelTest } from './levelTest.js';
