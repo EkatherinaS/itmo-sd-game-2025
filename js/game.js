@@ -9,9 +9,9 @@ class Game {
         const ctx = canvas.getContext('2d');
         this.loop = this.loop.bind(this);
 
-        // this.level = Level.create(CONST.LEVEL_TYPES.TEST);
-        this.level = Level.create(CONST.LEVEL_TYPES.RANDOM, null, 5);
-        // this.level = Level.create(CONST.LEVEL_TYPES.FROM_JSON, "/itmo-sd-game-2025/levelMaps/levelFirst.json");
+        // this.level = Level.create(CONST.LEVEL_TYPES_TEST);
+        this.level = Level.create(CONST.LEVEL_TYPES_RANDOM, null, 5);
+        // this.level = Level.create(CONST.LEVEL_TYPE_FROM_JSON, "/itmo-sd-game-2025/levelMaps/levelFirst.json");
 
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx);

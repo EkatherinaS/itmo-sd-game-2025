@@ -82,8 +82,6 @@ export const PLAYER_SPRITES = {
     ],
 };
 
-export const LEVEL_TYPES = {
-    RANDOM: 'random',
-    FROM_JSON: 'fromJSON',
-    TEST: 'test',
-};
+export const LEVEL_TYPES_RANDOM = 'random';
+export const LEVEL_TYPES_FROM_JSON = 'fromJSON';
+export const LEVEL_TYPES_TEST = 'test';

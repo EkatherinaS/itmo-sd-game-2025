@@ -3,7 +3,6 @@ import { MapFactory } from './mapFactory.js';
 
 export class LevelFromJSON extends LevelBase {
     constructor(filePath = '/itmo-sd-game-2025/levelMaps/levelTest.json') {
-        console.log('constructor');
         super();
         this.filePath = filePath;
         this.mapFactory = new MapFactory();
