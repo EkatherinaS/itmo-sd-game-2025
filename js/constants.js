@@ -54,7 +54,28 @@ export const IMAGES = [
     'lumen/lumen-down2.svg',
     'lumen/lumen-down3.svg',
     'lumen/lumen-down4.svg',
+    'shadow/orb1.svg',
+    'shadow/orb2.svg',
+    'shadow/orb3.svg',
+    'shadow/orb4.svg',
+    'shadow/orb5.svg',
+    'shadow/orb6.svg',
+    'shadow/leech1.svg',
+    'shadow/leech2.svg',
+    'shadow/leech3.svg',
+    'shadow/leech4.svg',
+    'shadow/leech5.svg',
+    'shadow/leech6.svg',
+    'shadow/slug1.svg',
+    'shadow/slug2.svg',
+    'shadow/slug3.svg',
+    'shadow/slug4.svg',
+    'shadow/slug5.svg',
+    'shadow/slug6.svg',
+    'shadow/slug7.svg',
+    'shadow/slug8.svg',
 ];
+
 export const PLAYER_SPRITES = {
     left: [
         'lumen/lumen-left1.svg',
@@ -85,3 +106,32 @@ export const PLAYER_SPRITES = {
 export const LEVEL_TYPES_RANDOM = 'random';
 export const LEVEL_TYPES_FROM_JSON = 'fromJSON';
 export const LEVEL_TYPES_TEST = 'test';
+
+export const ENEMY_SPRITES = {
+    orb: [
+        'shadow/orb1.svg',
+        'shadow/orb2.svg',
+        'shadow/orb3.svg',
+        'shadow/orb4.svg',
+        'shadow/orb5.svg',
+        'shadow/orb6.svg',
+    ],
+    leech: [
+        'shadow/leech1.svg',
+        'shadow/leech2.svg',
+        'shadow/leech3.svg',
+        'shadow/leech4.svg',
+        'shadow/leech5.svg',
+        'shadow/leech6.svg',
+    ],
+    slug: [
+        'shadow/slug1.svg',
+        'shadow/slug2.svg',
+        'shadow/slug3.svg',
+        'shadow/slug4.svg',
+        'shadow/slug5.svg',
+        'shadow/slug6.svg',
+        'shadow/slug7.svg',
+        'shadow/slug8.svg',
+    ],
+};

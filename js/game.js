@@ -25,6 +25,9 @@ class Game {
         await this.level.init();
 
         const positionLookup = this.level.getPositionLookup();
+        const map = this.level.getMap();
+        this.entityManager.setEntities(map);
+        this.entityManager.setPositionLookup(positionLookup);
         this.controller.setEventListeners(this.entityManager, positionLookup);
         const entryPos = this.level.getEntryPosition();
         const spawnX = entryPos
@@ -39,6 +42,7 @@ class Game {
     }
 
     loop() {
+        this.entityManager.moveAll();
         const entities = this.entityManager.getAllEntities();
         const map = this.level.getEntities();
         this.renderer.renderEntities(entities);

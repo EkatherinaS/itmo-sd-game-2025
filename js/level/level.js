@@ -2,6 +2,7 @@ import * as CONST from '../constants.js';
 import { LevelRandom } from './levelRandom.js';
 import { LevelFromJSON } from './levelFromJSON.js';
 import { LevelTest } from './levelTest.js';
+import { GameMap } from './gameMap.js';
 
 export class Level {
     static create(
@@ -20,5 +21,9 @@ export class Level {
             default:
                 throw new Error(`Unknown map type: ${mapType}`);
         }
+    }
+
+    getMap() {
+        return new GameMap();
     }
 }
