@@ -40,7 +40,7 @@ export class CommandFactory {
         return new CmdUse(player, inventory, CONST.BLUE_MUSHROOM);
     }
 
-    createCmdUseYellowMushroom() {
+    createCmdUsePurpleMushroom() {
         const player = this.entityManager.getPlayer();
         const inventory = this.entityManager.getInventory();
         return new CmdUse(player, inventory, CONST.PURPLE_MUSHROOM);

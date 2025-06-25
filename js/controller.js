@@ -40,14 +40,14 @@ export class Controller {
 
         this.commands['green'] = commandFactory.createCmdUseGreenMushroom();
         this.commands['blue'] = commandFactory.createCmdUseBlueMushroom();
-        this.commands['yellow'] = commandFactory.createCmdUseYellowMushroom();
+        this.commands['purple'] = commandFactory.createCmdUsePurpleMushroom();
 
         this.pressedKeys = new Set();
 
         this.registerOnKeydown = [
             { keys: CONST.KEY_ITEM_1, command: this.commands['green'] },
             { keys: CONST.KEY_ITEM_2, command: this.commands['blue'] },
-            { keys: CONST.KEY_ITEM_3, command: this.commands['yellow'] },
+            { keys: CONST.KEY_ITEM_3, command: this.commands['purple'] },
         ];
 
         this.registerOnHold = [
