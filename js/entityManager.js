@@ -33,13 +33,19 @@ export class EntityManager {
         map.enemies.forEach(enemy => {
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
-                    this.enemies.push(new Orb(enemy.x, enemy.y));
+                    this.enemies.push(
+                        new Orb(enemy.x, enemy.y, this.player.lvl)
+                    );
                     break;
                 case 1:
-                    this.enemies.push(new Slug(enemy.x, enemy.y));
+                    this.enemies.push(
+                        new Slug(enemy.x, enemy.y, this.player.lvl)
+                    );
                     break;
                 default:
-                    this.enemies.push(new Leech(enemy.x, enemy.y));
+                    this.enemies.push(
+                        new Leech(enemy.x, enemy.y, this.player.lvl)
+                    );
             }
         });
         map.bonuses.forEach(bonus => {

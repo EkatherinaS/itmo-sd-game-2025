@@ -80,6 +80,7 @@ export class Player extends Actor {
     }
 
     updateLvl(lvl) {
+        this.lvl = lvl;
         this.power = lvl * CONST.PLAYER_POWER_MOD;
         this.hp = lvl * CONST.PLAYER_HP_MOD;
         this.armor = Math.max(

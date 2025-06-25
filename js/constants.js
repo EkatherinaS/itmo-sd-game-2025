@@ -22,6 +22,10 @@ export const STEP = 1;
 
 //TODO: align to difficulty or do smth with it to make the game playable
 
+export const ENEMY_HP_SCALE = 1.2;
+export const ENEMY_POWER_SCALE = 1.2;
+export const ENEMY_ARMOR_SCALE = 1.2;
+
 export const ENEMY_LEECH_HP = 40;
 export const ENEMY_LEECH_POWER = 10;
 export const ENEMY_LEECH_ARMOR = 0;

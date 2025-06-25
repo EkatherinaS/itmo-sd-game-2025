@@ -3,15 +3,15 @@ import { BehaviourPassive } from './behaviourPassive.js';
 import * as CONST from '../../constants.js';
 
 export class Leech extends BaseEnemy {
-    constructor(x, y) {
+    constructor(x, y, playerLvl = 1) {
         const sprite = CONST.ENEMY_SPRITES['leech'][0];
         super(
             sprite,
             x,
             y,
-            CONST.ENEMY_LEECH_HP,
-            CONST.ENEMY_LEECH_POWER,
-            CONST.ENEMY_LEECH_ARMOR
+            CONST.ENEMY_LEECH_HP * CONST.ENEMY_HP_SCALE * playerLvl,
+            CONST.ENEMY_LEECH_POWER * CONST.ENEMY_POWER_SCALE * playerLvl,
+            CONST.ENEMY_LEECH_ARMOR * CONST.ENEMY_ARMOR_SCALE * playerLvl
         );
         this.strategy = new BehaviourPassive();
         this.frameCount = 6;
