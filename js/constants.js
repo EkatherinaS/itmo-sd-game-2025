@@ -18,7 +18,7 @@ export const LIGHT_HEIGHT = 16;
 export const BLOCK_WIDTH = 8;
 export const BLOCK_HEIGHT = 8;
 
-export const STEP = 2;
+export const STEP = 1;
 
 //TODO: align to difficulty or do smth with it to make the game playable
 

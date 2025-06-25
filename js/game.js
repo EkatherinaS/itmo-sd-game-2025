@@ -70,6 +70,7 @@ export class Game {
             this.isRunning = false;
         }
 
+        this.controller.update();
         this.entityManager.moveAll();
         this.entityManager.checkCollide();
 
