@@ -1,11 +1,15 @@
 import { State } from './state.js';
 
 export class StatePanic extends State {
-    constructor() {
-        super();
+    constructor(enemy) {
+        super(enemy);
+
+        setTimeout(() => {
+            enemy.changeToNormalState();
+        }, '1000');
     }
 
     getMoveSpeed() {
-        return 4;
+        return 1;
     }
 }

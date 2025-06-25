@@ -9,13 +9,13 @@ export class CmdMove extends Command {
         this.positionLookup = positionLookup;
     }
 
+    resetPositionLookup(positionLookup) {
+        this.positionLookup = positionLookup;
+    }
+
     invoke() {
-        const x =
-            this.player.x +
-            Math.ceil((CONST.LIGHT_WIDTH - CONST.PLAYER_WIDTH) / 2);
-        const y =
-            this.player.y +
-            Math.ceil((CONST.LIGHT_HEIGHT - CONST.PLAYER_HEIGHT) / 2);
+        const x = this.player.x;
+        const y = this.player.y;
 
         if (
             this.direction === CONST.MOVE_LEFT &&
@@ -70,5 +70,6 @@ export class CmdMove extends Command {
 
         const frame = this.player.getNextFrame();
         this.player.sprite = CONST.PLAYER_SPRITES[this.direction][frame];
+        this.player.updateLight();
     }
 }

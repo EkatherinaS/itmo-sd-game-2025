@@ -1,5 +1,6 @@
 import * as CONST from '../constants.js';
 import { CmdMove } from './cmdMove.js';
+import { CmdUse } from './cmdUse.js';
 
 export class CommandFactory {
     constructor(entityManager, positionLookup) {
@@ -25,5 +26,23 @@ export class CommandFactory {
     createCmdMoveLeft() {
         const player = this.entityManager.getPlayer();
         return new CmdMove(player, CONST.MOVE_LEFT, this.positionLookup);
+    }
+
+    createCmdUseGreenMushroom() {
+        const player = this.entityManager.getPlayer();
+        const inventory = this.entityManager.getInventory();
+        return new CmdUse(player, inventory, CONST.GREEN_MUSHROOM);
+    }
+
+    createCmdUseBlueMushroom() {
+        const player = this.entityManager.getPlayer();
+        const inventory = this.entityManager.getInventory();
+        return new CmdUse(player, inventory, CONST.BLUE_MUSHROOM);
+    }
+
+    createCmdUsePurpleMushroom() {
+        const player = this.entityManager.getPlayer();
+        const inventory = this.entityManager.getInventory();
+        return new CmdUse(player, inventory, CONST.PURPLE_MUSHROOM);
     }
 }

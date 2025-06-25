@@ -1,12 +1,23 @@
 import * as CONST from '../../constants.js';
 import { Enemy } from './enemy.js';
 import { StateNormal } from './stateNormal.js';
+import { StatePanic } from './statePanic.js';
 
 export class BaseEnemy extends Enemy {
-    constructor(sprite, x, y) {
-        super(sprite, x, y);
-        this.state = new StateNormal();
+    constructor(sprite, x, y, hp, power, armor) {
+        super(sprite, x, y, hp, power, armor);
+        this.stateNormal = new StateNormal(this);
+        this.state = this.stateNormal;
         this.slowCount = 4;
+    }
+
+    fight(player, positionLookup) {
+        const hit = player.fight(this, positionLookup);
+        if (hit == 0) return false;
+
+        this.hp -= hit;
+        this.state = new StatePanic(this);
+        return true;
     }
 
     move(positionLookup, player) {
@@ -53,8 +64,8 @@ export class BaseEnemy extends Enemy {
         this.setNextSprite();
     }
 
-    changeState(state) {
-        this.state = state;
+    changeToNormalState() {
+        this.state = this.stateNormal;
     }
 
     //clone()

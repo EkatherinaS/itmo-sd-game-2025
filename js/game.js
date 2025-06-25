@@ -1,83 +1,96 @@
-import * as CONST from './constants.js';
 import { Renderer } from './renderer.js';
 import { EntityManager } from './entityManager.js';
 import { Controller } from './controller.js';
 import { Level } from './level/level.js';
+import * as CONST from './constants.js';
 
-class Game {
-    constructor(canvas) {
+export class Game {
+    constructor(canvas, info) {
         const ctx = canvas.getContext('2d');
-        this.loop = this.loop.bind(this);
+        const ctxInfo = info.getContext('2d');
 
-        // this.level = Level.create(CONST.LEVEL_TYPES_TEST);
-        // this.level = Level.create(CONST.LEVEL_TYPES_RANDOM, null, 10);
-        this.level = Level.create(
-            CONST.LEVEL_TYPES_FROM_JSON,
-            '/itmo-sd-game-2025/levelMaps/levelFirst.json'
-        );
+        this.loop = this.loop.bind(this);
+        this.level = Level.create(CONST.LEVEL_TYPES_RANDOM);
 
         this.entityManager = new EntityManager();
-        this.renderer = new Renderer(ctx);
+        this.renderer = new Renderer(ctx, ctxInfo);
         this.controller = new Controller();
+
+        this.isRunning = false;
+        this.levelComplete = false;
     }
 
-    async start() {
+    async run() {
+        if (this.isRunning) return;
+
+        this.isRunning = true;
+        while (!this.entityManager.isEndGame() && this.isRunning) {
+            this.levelComplete = false;
+            await this.initLevel();
+            await this.runLevel();
+        }
+    }
+
+    async initLevel() {
         await this.level.init();
 
-        const positionLookup = this.level.getPositionLookup();
-        const map = this.level.getMap();
-        this.entityManager.setEntities(map);
-        this.entityManager.setPositionLookup(positionLookup);
-        this.controller.setEventListeners(this.entityManager, positionLookup);
-        const entryPos = this.level.getEntryPosition();
-        const spawnX = entryPos
-            ? entryPos.x - 4
+        this.entityManager.setLevelInfo(this.level);
+        this.controller.setEventListeners(
+            this.entityManager,
+            this.level.getPositionLookup()
+        );
+
+        const entry = this.level.getEntry();
+        const spawnX = entry
+            ? entry.x
             : Math.floor(CONST.GAME_WIDTH / CONST.STEP / 2) * CONST.STEP;
-        const spawnY = entryPos
-            ? entryPos.y - 5
+        const spawnY = entry
+            ? entry.y
             : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
 
         this.entityManager.getPlayer().setCoords(spawnX, spawnY);
-        this.loop();
+    }
+
+    async runLevel() {
+        return new Promise(resolve => {
+            const gameLoop = () => {
+                if (this.levelComplete || !this.isRunning) {
+                    resolve();
+                    return;
+                }
+                this.loop();
+                requestAnimationFrame(gameLoop);
+            };
+            gameLoop();
+        });
     }
 
     loop() {
+        if (this.entityManager.isEndGame()) {
+            this.isRunning = false;
+        }
+
+        this.controller.update();
         this.entityManager.moveAll();
-        const entities = this.entityManager.getAllEntities();
-        const map = this.level.getEntities();
+        this.entityManager.checkCollide();
+
+        const inventory = this.entityManager.getInventory();
+        const experience = this.entityManager.getExperience();
+        const moving = this.entityManager.getMovableEntities();
+        const blocks = this.level.getBlocks();
+        const entry = this.level.getEntry();
+        let entities = blocks.concat([entry]).concat(moving);
+
+        if (this.entityManager.isLevelPassed()) {
+            const exit = this.level.getExit();
+            entities = entities.concat([exit]);
+
+            if (this.entityManager.isExitCollide()) {
+                this.levelComplete = true;
+            }
+        }
+
         this.renderer.renderEntities(entities);
-        this.renderer.renderMap(map);
-        requestAnimationFrame(this.loop);
+        this.renderer.renderInfo(inventory.getItems(), experience.getItems());
     }
 }
-
-function startGame() {
-    startBtn.hidden = true;
-    audioPlayer.play();
-    game.start();
-}
-
-const startBtn = document.getElementById('startButton');
-startBtn.addEventListener('click', startGame);
-
-const audioPlayer = document.getElementById('audioPlayer');
-audioPlayer.volume = 0.1;
-
-const canvas = document.getElementById('gameCanvas');
-canvas.width = CONST.GAME_WIDTH * CONST.PIXEL_SIZE;
-canvas.height = CONST.GAME_HEIGHT * CONST.PIXEL_SIZE;
-const container = canvas.parentElement;
-
-function resizeCanvas() {
-    const scale = Math.min(
-        container.clientWidth / canvas.width,
-        container.clientHeight / canvas.height
-    );
-    canvas.style.width = `${canvas.width * scale}px`;
-    canvas.style.height = `${canvas.height * scale}px`;
-}
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-const game = new Game(canvas);

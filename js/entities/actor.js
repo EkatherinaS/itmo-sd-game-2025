@@ -8,12 +8,12 @@ export class Actor extends Entity {
         width = 0,
         height = 0,
         hp = 0,
-        attack = 0,
+        power = 0,
         armor = 0
     ) {
         super(sprite, x, y, width, height);
         this.hp = hp;
-        this.attack = attack;
+        this.power = power;
         this.armor = armor;
 
         this.frame = 0;
@@ -31,5 +31,9 @@ export class Actor extends Entity {
             this.count--;
         }
         return this.frame;
+    }
+
+    isAlive() {
+        return this.hp > 0;
     }
 }
