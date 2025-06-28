@@ -13,11 +13,21 @@ export class JSONMapFactory extends AbstractMapFactory {
         return new Block(x, y, width, height);
     }
 
-    createEntryPoint(x, y, width = CONST.BLOCK_HEIGHT, height = CONST.BLOCK_HEIGHT) {
+    createEntryPoint(
+        x,
+        y,
+        width = CONST.BLOCK_HEIGHT,
+        height = CONST.BLOCK_HEIGHT
+    ) {
         return new EntryPoint(x, y, width, height);
     }
 
-    createExitPoint(x, y, width = CONST.BLOCK_HEIGHT, height = CONST.BLOCK_HEIGHT) {
+    createExitPoint(
+        x,
+        y,
+        width = CONST.BLOCK_HEIGHT,
+        height = CONST.BLOCK_HEIGHT
+    ) {
         return new ExitPoint(x, y, width, height);
     }
 
@@ -89,4 +99,4 @@ export class JSONMapFactory extends AbstractMapFactory {
 
         return entities;
     }
-} 
+}

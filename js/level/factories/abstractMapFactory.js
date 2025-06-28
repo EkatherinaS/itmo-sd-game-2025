@@ -1,7 +1,9 @@
 export class AbstractMapFactory {
     constructor() {
         if (this.constructor === AbstractMapFactory) {
-            throw new Error('AbstractMapFactory cannot be instantiated directly');
+            throw new Error(
+                'AbstractMapFactory cannot be instantiated directly'
+            );
         }
     }
 
@@ -20,4 +22,4 @@ export class AbstractMapFactory {
     createMap() {
         throw new Error('createMap method must be implemented');
     }
-} 
+}

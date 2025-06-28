@@ -24,14 +24,12 @@ export class MapFactory {
         return this.factories.test.createMap();
     }
 
-
     getFactory(type) {
         if (!this.factories[type]) {
             throw new Error(`Unknown factory type: ${type}`);
         }
         return this.factories[type];
     }
-
 
     addFactory(type, factory) {
         if (!(factory instanceof AbstractMapFactory)) {
