@@ -14,35 +14,10 @@ export class LevelBase {
         this.blocks = [];
         this.enemies = [];
         this.bonuses = [];
-
-        this.#getPlaceholderData();
     }
 
     async init() {
         throw new Error("Method 'init()' must be implemented");
-    }
-
-    //TODO: generate enemies & bonuses according to difficulty
-    #getPlaceholderData() {
-        for (let i = 1; i < 5; i++) {
-            const x = Math.floor(
-                Math.random() * (CONST.GAME_WIDTH - CONST.ENEMY_WIDTH)
-            );
-            const y = Math.floor(
-                Math.random() * (CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT)
-            );
-            this.enemies.push(new Position(x, y));
-        }
-
-        for (let i = 1; i < 5; i++) {
-            const x = Math.floor(
-                Math.random() * (CONST.GAME_WIDTH - CONST.ENEMY_WIDTH)
-            );
-            const y = Math.floor(
-                Math.random() * (CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT)
-            );
-            this.bonuses.push(new Position(x, y));
-        }
     }
 
     getPositionLookup() {
@@ -72,10 +47,9 @@ export class LevelBase {
         return new PositionLookup(lookup);
     }
 
-    //TODO: possibly there's a better way to do the same...
     getBlocks() {
         return this.entities.filter(
-            entity => !(entity.isExit || entity.isEntry)
+            entity => entity.constructor.name === 'Block'
         );
     }
 

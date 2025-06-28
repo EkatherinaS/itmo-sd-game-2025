@@ -4,15 +4,23 @@ import { StateNormal } from './stateNormal.js';
 import { StatePanic } from './statePanic.js';
 
 export class BaseEnemy extends Enemy {
-    constructor(sprite, hp, power, armor, lvl) {
-        super(sprite, 0, 0, 0, 0, 0);
+    constructor(sprite, x, y, hp, power, armor) {
+        super(
+            sprite,
+            x,
+            y,
+            CONST.ENEMY_HEIGHT,
+            CONST.ENEMY_WIDTH,
+            hp,
+            power,
+            armor
+        );
         this.stateNormal = new StateNormal(this);
         this.state = this.stateNormal;
         this.slowCount = 4;
         this.baseHp = hp;
         this.basePower = power;
         this.baseArmor = armor;
-        this.#updateLvl(lvl);
     }
 
     fight(player, positionLookup) {
@@ -26,13 +34,6 @@ export class BaseEnemy extends Enemy {
 
     update(positionLookup, player) {
         this.#move(positionLookup, player);
-        this.#updateLvl(player.lvl);
-    }
-
-    #updateLvl(lvl) {
-        this.hp = this.baseHp * CONST.ENEMY_HP_SCALE * lvl;
-        this.power = this.basePower * CONST.ENEMY_POWER_SCALE * lvl;
-        this.armor = this.baseArmor * CONST.ENEMY_ARMOR_SCALE * lvl;
     }
 
     #move(positionLookup, player) {

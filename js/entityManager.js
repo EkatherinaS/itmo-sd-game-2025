@@ -14,11 +14,10 @@ export class EntityManager {
         this.inventory = new Inventory();
         this.experience = new Experience(this.player);
         this.enemySamples = {
-            orb: new Orb(this.player.lvl),
-            slug: new Slug(this.player.lvl),
-            leech: new Leech(this.player.lvl),
+            orb: new Orb(0, 0, this.player.lvl),
+            slug: new Slug(0, 0, this.player.lvl),
+            leech: new Leech(0, 0, this.player.lvl),
         };
-
         this.bonuses = [];
         this.enemies = [];
         this.isExitOpen = false;
@@ -36,37 +35,85 @@ export class EntityManager {
     }
 
     #setEntities(map) {
-        map.enemies.forEach(enemy => {
-            switch (Math.floor(Math.random() * 3)) {
-                case 0:
-                    this.enemies.push(this.enemySamples.orb.clone());
-                    break;
-                case 1:
-                    this.enemies.push(this.enemySamples.slug.clone());
-                    break;
-                default:
-                    this.enemies.push(this.enemySamples.leech.clone());
-            }
-            this.enemies.at(-1).setCoords(enemy.x, enemy.y);
-        });
+        // Добавляем врагов и бонусы из карты
+        if (map.entities) {
+            map.entities.forEach(entity => {
+                if (
+                    entity instanceof Orb ||
+                    entity instanceof Slug ||
+                    entity instanceof Leech
+                ) {
+                    this.enemies.push(entity);
+                } else if (
+                    entity instanceof MushroomGreen ||
+                    entity instanceof MushroomBlue ||
+                    entity instanceof MushroomPurple
+                ) {
+                    this.bonuses.push(entity);
+                }
+            });
+        }
 
-        map.bonuses.forEach(bonus => {
-            switch (Math.floor(Math.random() * 3)) {
-                case 0:
-                    this.bonuses.push(new MushroomGreen(bonus.x, bonus.y));
-                    break;
-                case 1:
-                    this.bonuses.push(new MushroomBlue(bonus.x, bonus.y));
-                    break;
-                default:
-                    this.bonuses.push(new MushroomPurple(bonus.x, bonus.y));
-            }
-        });
+        // Обрабатываем врагов из старых уровней (как Position) - используем clone()
+        if (map.enemies) {
+            map.enemies.forEach(enemy => {
+                switch (Math.floor(Math.random() * 3)) {
+                    case 0:
+                        this.enemies.push(
+                            this.enemySamples.orb.clone(
+                                enemy.x,
+                                enemy.y,
+                                this.player.lvl
+                            )
+                        );
+                        break;
+                    case 1:
+                        this.enemies.push(
+                            this.enemySamples.slug.clone(
+                                enemy.x,
+                                enemy.y,
+                                this.player.lvl
+                            )
+                        );
+                        break;
+                    default:
+                        this.enemies.push(
+                            this.enemySamples.leech.clone(
+                                enemy.x,
+                                enemy.y,
+                                this.player.lvl
+                            )
+                        );
+                }
+            });
+        }
+
+        // Обрабатываем бонусы из старых уровней
+        if (map.bonuses) {
+            map.bonuses.forEach(bonus => {
+                switch (Math.floor(Math.random() * 3)) {
+                    case 0:
+                        this.bonuses.push(new MushroomGreen(bonus.x, bonus.y));
+                        break;
+                    case 1:
+                        this.bonuses.push(new MushroomBlue(bonus.x, bonus.y));
+                        break;
+                    default:
+                        this.bonuses.push(new MushroomPurple(bonus.x, bonus.y));
+                }
+            });
+        }
     }
 
     setLevelInfo(level) {
         this.positionLookup = level.getPositionLookup();
         this.exit = level.getExit();
+        // Обновляем образцы врагов с текущим уровнем игрока
+        this.enemySamples = {
+            orb: new Orb(0, 0, this.player.lvl),
+            slug: new Slug(0, 0, this.player.lvl),
+            leech: new Leech(0, 0, this.player.lvl),
+        };
         this.#setEntities(level);
     }
 
@@ -81,6 +128,7 @@ export class EntityManager {
             const hit = enemy.fight(this.player, this.positionLookup);
             if (hit) this.experience.updateHp();
         });
+
         this.enemies = this.enemies.filter(enemy => {
             if (!enemy.isAlive()) {
                 this.experience.addExp(2);
