@@ -27,6 +27,10 @@ export class EntityManager {
         return this.player;
     }
 
+    setPlayerCoords(x, y) {
+        this.player.setCoords(x, y);
+    }
+
     getMovableEntities() {
         return this.player
             .getEntities()

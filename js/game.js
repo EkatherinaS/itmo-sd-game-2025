@@ -52,7 +52,7 @@ export class Game {
             ? entry.y
             : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
 
-        this.entityManager.getPlayer().setCoords(spawnX, spawnY);
+        this.entityManager.setPlayerCoords(spawnX, spawnY);
     }
 
     async runLevel() {
