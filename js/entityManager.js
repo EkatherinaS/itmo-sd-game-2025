@@ -13,6 +13,12 @@ export class EntityManager {
         this.player = new Player();
         this.inventory = new Inventory();
         this.experience = new Experience(this.player);
+        this.enemySamples = {
+            orb: new Orb(this.player.lvl),
+            slug: new Slug(this.player.lvl),
+            leech: new Leech(this.player.lvl)
+        }
+
         this.bonuses = [];
         this.enemies = [];
         this.isExitOpen = false;
@@ -33,21 +39,17 @@ export class EntityManager {
         map.enemies.forEach(enemy => {
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
-                    this.enemies.push(
-                        new Orb(enemy.x, enemy.y, this.player.lvl)
-                    );
+                    this.enemies.push(this.enemySamples.orb.clone());
                     break;
                 case 1:
-                    this.enemies.push(
-                        new Slug(enemy.x, enemy.y, this.player.lvl)
-                    );
+                    this.enemies.push(this.enemySamples.slug.clone());
                     break;
                 default:
-                    this.enemies.push(
-                        new Leech(enemy.x, enemy.y, this.player.lvl)
-                    );
+                    this.enemies.push(this.enemySamples.leech.clone());
             }
+            this.enemies.at(-1).setCoords(enemy.x, enemy.y);
         });
+
         map.bonuses.forEach(bonus => {
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
@@ -70,7 +72,7 @@ export class EntityManager {
 
     moveAll() {
         this.enemies.forEach(enemy => {
-            enemy.move(this.positionLookup, this.player);
+            enemy.update(this.positionLookup, this.player);
         });
     }
 
