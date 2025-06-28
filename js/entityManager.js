@@ -36,21 +36,24 @@ export class EntityManager {
         this.bonuses = [];
 
         if (level.entities) {
-                entity =>
+            this.enemies = level.entities.filter(entity => {
+                return (
                     entity.constructor.name === CONST.ENTITY_CLASS_ORB ||
                     entity.constructor.name === CONST.ENTITY_CLASS_SLUG ||
                     entity.constructor.name === CONST.ENTITY_CLASS_LEECH
-            );
+                );
+            });
 
-            this.bonuses = level.entities.filter(
-                entity =>
+            this.bonuses = level.entities.filter(entity => {
+                return (
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_GREEN ||
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_BLUE ||
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_PURPLE
-            );
+                );
+            });
         }
     }
 
