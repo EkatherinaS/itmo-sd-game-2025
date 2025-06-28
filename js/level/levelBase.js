@@ -14,6 +14,7 @@ export class LevelBase {
         this.blocks = [];
         this.enemies = [];
         this.bonuses = [];
+        this.entities = [];
     }
 
     async init() {
