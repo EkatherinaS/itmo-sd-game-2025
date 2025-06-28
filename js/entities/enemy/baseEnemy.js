@@ -9,8 +9,6 @@ export class BaseEnemy extends Enemy {
             sprite,
             x,
             y,
-            CONST.ENEMY_HEIGHT,
-            CONST.ENEMY_WIDTH,
             hp,
             power,
             armor
