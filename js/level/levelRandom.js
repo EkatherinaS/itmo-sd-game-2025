@@ -7,8 +7,6 @@ export class LevelRandom extends LevelBase {
         this.difficulty = difficulty;
         this.mapFactory = new MapFactory();
         this.init();
-        this.enemies = [];
-        this.bonuses = [];
     }
 
     init() {
