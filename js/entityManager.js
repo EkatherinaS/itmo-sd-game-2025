@@ -1,9 +1,3 @@
-import { Leech } from './entities/enemy/leech.js';
-import { Orb } from './entities/enemy/orb.js';
-import { Slug } from './entities/enemy/slug.js';
-import { MushroomGreen } from './entities/bonus/mushroomGreen.js';
-import { MushroomBlue } from './entities/bonus/mushroomBlue.js';
-import { MushroomPurple } from './entities/bonus/mushroomPurple.js';
 import { Player } from './entities/player/player.js';
 import { Inventory } from './info/inventory.js';
 import { Experience } from './info/experience.js';
@@ -14,11 +8,6 @@ export class EntityManager {
         this.player = new Player();
         this.inventory = new Inventory();
         this.experience = new Experience(this.player);
-        this.enemySamples = {
-            orb: new Orb(0, 0, this.player.lvl),
-            slug: new Slug(0, 0, this.player.lvl),
-            leech: new Leech(0, 0, this.player.lvl),
-        };
         this.bonuses = [];
         this.enemies = [];
         this.isExitOpen = false;
@@ -39,77 +28,30 @@ export class EntityManager {
             .concat(this.bonuses);
     }
 
-    #setEntities(map) {
-        if (map.entities) {
-            map.entities.forEach(entity => {
-                if (
+    setLevelInfo(level) {
+        this.positionLookup = level.getPositionLookup();
+        this.exit = level.getExit();
+
+        this.enemies = [];
+        this.bonuses = [];
+
+        if (level.entities) {
+                entity =>
                     entity.constructor.name === CONST.ENTITY_CLASS_ORB ||
                     entity.constructor.name === CONST.ENTITY_CLASS_SLUG ||
                     entity.constructor.name === CONST.ENTITY_CLASS_LEECH
-                ) {
-                    this.enemies.push(entity);
-                } else if (
+            );
+
+            this.bonuses = level.entities.filter(
+                entity =>
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_GREEN ||
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_BLUE ||
                     entity.constructor.name ===
                         CONST.ENTITY_CLASS_MUSHROOM_PURPLE
-                ) {
-                    this.bonuses.push(entity);
-                }
-            });
+            );
         }
-
-        if (map.enemies) {
-            map.enemies.forEach(enemy => {
-                switch (Math.floor(Math.random() * 3)) {
-                    case 0:
-                        const orbClone = this.enemySamples.orb.clone();
-                        orbClone.x = enemy.x;
-                        orbClone.y = enemy.y;
-                        this.enemies.push(orbClone);
-                        break;
-                    case 1:
-                        const slugClone = this.enemySamples.slug.clone();
-                        slugClone.x = enemy.x;
-                        slugClone.y = enemy.y;
-                        this.enemies.push(slugClone);
-                        break;
-                    default:
-                        const leechClone = this.enemySamples.leech.clone();
-                        leechClone.x = enemy.x;
-                        leechClone.y = enemy.y;
-                        this.enemies.push(leechClone);
-                }
-            });
-        }
-
-        if (map.bonuses) {
-            map.bonuses.forEach(bonus => {
-                switch (Math.floor(Math.random() * 3)) {
-                    case 0:
-                        this.bonuses.push(new MushroomGreen(bonus.x, bonus.y));
-                        break;
-                    case 1:
-                        this.bonuses.push(new MushroomBlue(bonus.x, bonus.y));
-                        break;
-                    default:
-                        this.bonuses.push(new MushroomPurple(bonus.x, bonus.y));
-                }
-            });
-        }
-    }
-
-    setLevelInfo(level) {
-        this.positionLookup = level.getPositionLookup();
-        this.exit = level.getExit();
-        this.enemySamples = {
-            orb: new Orb(0, 0, this.player.lvl),
-            slug: new Slug(0, 0, this.player.lvl),
-            leech: new Leech(0, 0, this.player.lvl),
-        };
-        this.#setEntities(level);
     }
 
     moveAll() {
