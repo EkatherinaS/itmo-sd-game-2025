@@ -202,3 +202,13 @@ export const ENEMY_SPRITES = {
         'shadow/slug8.svg',
     ],
 };
+
+export const ENTITY_CLASS_BLOCK = 'Block';
+export const ENTITY_CLASS_ENTRY_POINT = 'EntryPoint';
+export const ENTITY_CLASS_EXIT_POINT = 'ExitPoint';
+export const ENTITY_CLASS_ORB = 'Orb';
+export const ENTITY_CLASS_LEECH = 'Leech';
+export const ENTITY_CLASS_SLUG = 'Slug';
+export const ENTITY_CLASS_MUSHROOM_GREEN = 'MushroomGreen';
+export const ENTITY_CLASS_MUSHROOM_BLUE = 'MushroomBlue';
+export const ENTITY_CLASS_MUSHROOM_PURPLE = 'MushroomPurple';

@@ -7,6 +7,7 @@ import { MushroomPurple } from './entities/bonus/mushroomPurple.js';
 import { Player } from './entities/player/player.js';
 import { Inventory } from './info/inventory.js';
 import { Experience } from './info/experience.js';
+import * as CONST from './constants.js';
 
 export class EntityManager {
     constructor() {
@@ -42,15 +43,18 @@ export class EntityManager {
         if (map.entities) {
             map.entities.forEach(entity => {
                 if (
-                    entity instanceof Orb ||
-                    entity instanceof Slug ||
-                    entity instanceof Leech
+                    entity.constructor.name === CONST.ENTITY_CLASS_ORB ||
+                    entity.constructor.name === CONST.ENTITY_CLASS_SLUG ||
+                    entity.constructor.name === CONST.ENTITY_CLASS_LEECH
                 ) {
                     this.enemies.push(entity);
                 } else if (
-                    entity instanceof MushroomGreen ||
-                    entity instanceof MushroomBlue ||
-                    entity instanceof MushroomPurple
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_GREEN ||
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_BLUE ||
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_PURPLE
                 ) {
                     this.bonuses.push(entity);
                 }

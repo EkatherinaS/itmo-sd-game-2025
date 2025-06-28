@@ -50,7 +50,7 @@ export class LevelBase {
 
     getBlocks() {
         return this.entities.filter(
-            entity => entity.constructor.name === 'Block'
+            entity => entity.constructor.name === CONST.ENTITY_CLASS_BLOCK
         );
     }
 
