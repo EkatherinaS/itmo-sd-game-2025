@@ -6,4 +6,9 @@ export class Entity {
         this.width = width;
         this.height = height;
     }
+
+    setCoords(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 }

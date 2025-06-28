@@ -9,6 +9,9 @@ export class BaseEnemy extends Enemy {
         this.stateNormal = new StateNormal(this);
         this.state = this.stateNormal;
         this.slowCount = 4;
+        this.baseHp = hp;
+        this.basePower = power;
+        this.baseArmor = armor;
     }
 
     fight(player, positionLookup) {
@@ -20,7 +23,11 @@ export class BaseEnemy extends Enemy {
         return true;
     }
 
-    move(positionLookup, player) {
+    update(positionLookup, player) {
+        this.#move(positionLookup, player);
+    }
+
+    #move(positionLookup, player) {
         const speed = this.state.getMoveSpeed();
         const dir = this.strategy.getMoveDirection(this, player);
 

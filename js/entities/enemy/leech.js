@@ -3,7 +3,7 @@ import { BehaviourPassive } from './behaviourPassive.js';
 import * as CONST from '../../constants.js';
 
 export class Leech extends BaseEnemy {
-    constructor(x, y, playerLvl = 1) {
+    constructor(x, y, playerLvl) {
         const sprite = CONST.ENEMY_SPRITES['leech'][0];
         super(
             sprite,
@@ -16,13 +16,14 @@ export class Leech extends BaseEnemy {
         this.strategy = new BehaviourPassive();
         this.frameCount = 6;
         this.slowCount = 6;
+        this.playerLvl = playerLvl;
     }
 
     setNextSprite() {
         this.sprite = CONST.ENEMY_SPRITES['leech'][this.getNextFrame()];
     }
 
-    clone() {
-        return new Leech(this.x, this.y);
+    clone(x, y, playerLvl) {
+        return new Leech(x, y, playerLvl);
     }
 }

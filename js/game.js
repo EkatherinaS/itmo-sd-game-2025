@@ -10,7 +10,11 @@ export class Game {
         const ctxInfo = info.getContext('2d');
 
         this.loop = this.loop.bind(this);
-        this.level = Level.create(CONST.LEVEL_TYPES_RANDOM);
+        this.level = Level.create(
+            CONST.LEVEL_TYPES_RANDOM,
+            null,
+            CONST.GAME_DIFFICULTY
+        );
 
         this.entityManager = new EntityManager();
         this.renderer = new Renderer(ctx, ctxInfo);

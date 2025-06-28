@@ -11,8 +11,7 @@ export class LevelFromJSON extends LevelBase {
     async init() {
         try {
             this.entities = await this.mapFactory.createFromJSON(this.filePath);
-            // console.log('Entities loaded:', this.entities);
-            return this.entities;
+            return Promise.resolve();
         } catch (error) {
             console.error('Loading failed:', error);
             this.entities = this.mapFactory.getTestData();

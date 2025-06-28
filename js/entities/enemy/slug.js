@@ -15,13 +15,14 @@ export class Slug extends BaseEnemy {
         );
         this.strategy = new BehaviourCowardy();
         this.frameCount = 8;
+        this.playerLvl = playerLvl;
     }
 
     setNextSprite() {
         this.sprite = CONST.ENEMY_SPRITES['slug'][this.getNextFrame()];
     }
 
-    clone() {
-        return new Slug(this.x, this.y);
+    clone(x, y, playerLvl) {
+        return new Slug(x, y, playerLvl);
     }
 }

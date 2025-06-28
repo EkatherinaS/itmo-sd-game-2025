@@ -7,8 +7,8 @@ export class Enemy extends Actor {
             sprite,
             x,
             y,
-            CONST.ENEMY_HEIGHT,
             CONST.ENEMY_WIDTH,
+            CONST.ENEMY_HEIGHT,
             hp,
             power,
             armor
