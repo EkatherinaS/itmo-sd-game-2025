@@ -25,7 +25,7 @@ export class BaseEnemy extends Enemy {
     }
 
     update(positionLookup, player) {
-        this.#move(positionLookup, player)
+        this.#move(positionLookup, player);
         this.#updateLvl(player.lvl);
     }
 

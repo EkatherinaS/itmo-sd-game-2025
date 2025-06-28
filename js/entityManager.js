@@ -16,8 +16,8 @@ export class EntityManager {
         this.enemySamples = {
             orb: new Orb(this.player.lvl),
             slug: new Slug(this.player.lvl),
-            leech: new Leech(this.player.lvl)
-        }
+            leech: new Leech(this.player.lvl),
+        };
 
         this.bonuses = [];
         this.enemies = [];
