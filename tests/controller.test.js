@@ -6,7 +6,6 @@ import { Position } from '../js/level/position.js';
 import { PositionInfo } from '../js/level/positionInfo.js';
 import test from 'node:test';
 import assert from 'node:assert';
-import { Console, log } from 'node:console';
 
 var lookup = new Map();
 const initPos = { x: 2, y: 2 };
