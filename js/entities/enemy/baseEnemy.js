@@ -46,13 +46,19 @@ export class BaseEnemy extends Enemy {
             positionLookup.isPositionBlocked(checkNewX, checkY) ||
             positionLookup.isPositionBlocked(checkNewX + width, checkY) ||
             positionLookup.isPositionBlocked(checkNewX, checkY + height) ||
-            positionLookup.isPositionBlocked(checkNewX + width, checkY + height);
+            positionLookup.isPositionBlocked(
+                checkNewX + width,
+                checkY + height
+            );
 
         const blockedY =
             positionLookup.isPositionBlocked(checkX, checkNewY) ||
             positionLookup.isPositionBlocked(checkX + width, checkNewY) ||
             positionLookup.isPositionBlocked(checkX, checkNewY + height) ||
-            positionLookup.isPositionBlocked(checkX + width, checkNewY + height);
+            positionLookup.isPositionBlocked(
+                checkX + width,
+                checkNewY + height
+            );
 
         const wallX = nextX < 0 || nextX > CONST.GAME_WIDTH - CONST.ENEMY_WIDTH;
         const wallY =
