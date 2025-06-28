@@ -183,32 +183,24 @@ export class MapBuilder {
 
             switch (enemyType) {
                 case 'leech':
-                    newEnemy = this.enemySamples.leech.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                    newEnemy = this.enemySamples.leech.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
                 case 'orb':
-                    newEnemy = this.enemySamples.orb.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                    newEnemy = this.enemySamples.orb.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
                 case 'slug':
-                    newEnemy = this.enemySamples.slug.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                    newEnemy = this.enemySamples.slug.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
                 default:
-                    newEnemy = this.enemySamples.leech.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                    newEnemy = this.enemySamples.leech.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
             }
 
             hasCollision = this.#checkCollision(

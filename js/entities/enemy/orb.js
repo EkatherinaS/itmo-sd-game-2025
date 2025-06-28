@@ -22,7 +22,18 @@ export class Orb extends BaseEnemy {
         this.sprite = CONST.ENEMY_SPRITES['orb'][this.getNextFrame()];
     }
 
-    clone(x, y, playerLvl) {
-        return new Orb(x, y, playerLvl);
+    clone() {
+        const cloned = new Orb(this.x, this.y, this.playerLvl);
+        cloned.hp = this.hp;
+        cloned.power = this.power;
+        cloned.armor = this.armor;
+        cloned.baseHp = this.baseHp;
+        cloned.basePower = this.basePower;
+        cloned.baseArmor = this.baseArmor;
+        cloned.slowCount = this.slowCount;
+        cloned.frame = this.frame;
+        cloned.frameCount = this.frameCount;
+        cloned.count = this.count;
+        return cloned;
     }
 }

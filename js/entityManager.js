@@ -35,7 +35,6 @@ export class EntityManager {
     }
 
     #setEntities(map) {
-        // Добавляем врагов и бонусы из карты
         if (map.entities) {
             map.entities.forEach(entity => {
                 if (
@@ -54,41 +53,30 @@ export class EntityManager {
             });
         }
 
-        // Обрабатываем врагов из старых уровней (как Position) - используем clone()
         if (map.enemies) {
             map.enemies.forEach(enemy => {
                 switch (Math.floor(Math.random() * 3)) {
                     case 0:
-                        this.enemies.push(
-                            this.enemySamples.orb.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
+                        const orbClone = this.enemySamples.orb.clone();
+                        orbClone.x = enemy.x;
+                        orbClone.y = enemy.y;
+                        this.enemies.push(orbClone);
                         break;
                     case 1:
-                        this.enemies.push(
-                            this.enemySamples.slug.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
+                        const slugClone = this.enemySamples.slug.clone();
+                        slugClone.x = enemy.x;
+                        slugClone.y = enemy.y;
+                        this.enemies.push(slugClone);
                         break;
                     default:
-                        this.enemies.push(
-                            this.enemySamples.leech.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
+                        const leechClone = this.enemySamples.leech.clone();
+                        leechClone.x = enemy.x;
+                        leechClone.y = enemy.y;
+                        this.enemies.push(leechClone);
                 }
             });
         }
 
-        // Обрабатываем бонусы из старых уровней
         if (map.bonuses) {
             map.bonuses.forEach(bonus => {
                 switch (Math.floor(Math.random() * 3)) {
@@ -108,7 +96,6 @@ export class EntityManager {
     setLevelInfo(level) {
         this.positionLookup = level.getPositionLookup();
         this.exit = level.getExit();
-        // Обновляем образцы врагов с текущим уровнем игрока
         this.enemySamples = {
             orb: new Orb(0, 0, this.player.lvl),
             slug: new Slug(0, 0, this.player.lvl),
