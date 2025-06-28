@@ -5,16 +5,7 @@ import { StatePanic } from './statePanic.js';
 
 export class BaseEnemy extends Enemy {
     constructor(sprite, x, y, hp, power, armor) {
-        super(
-            sprite,
-            x,
-            y,
-            CONST.ENEMY_HEIGHT,
-            CONST.ENEMY_WIDTH,
-            hp,
-            power,
-            armor
-        );
+        super(sprite, x, y, hp, power, armor);
         this.stateNormal = new StateNormal(this);
         this.state = this.stateNormal;
         this.slowCount = 4;
