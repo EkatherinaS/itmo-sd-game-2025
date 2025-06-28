@@ -20,50 +20,50 @@ export class CmdMove extends Command {
         if (
             this.direction === CONST.MOVE_LEFT &&
             x > 0 &&
-            !this.positionLookup.getPositionInfo(x - CONST.STEP, y).blocked &&
-            !this.positionLookup.getPositionInfo(
+            !this.positionLookup.isPositionBlocked(x - CONST.STEP, y) &&
+            !this.positionLookup.isPositionBlocked(
                 x - CONST.STEP,
                 y + CONST.PLAYER_HEIGHT
-            ).blocked
+            )
         ) {
             this.player.x -= CONST.STEP;
         }
         if (
             this.direction === CONST.MOVE_RIGHT &&
             x < CONST.GAME_WIDTH - CONST.PLAYER_WIDTH &&
-            !this.positionLookup.getPositionInfo(
+            !this.positionLookup.isPositionBlocked(
                 x + CONST.PLAYER_WIDTH + CONST.STEP,
                 y
-            ).blocked &&
-            !this.positionLookup.getPositionInfo(
+            ) &&
+            !this.positionLookup.isPositionBlocked(
                 x + CONST.PLAYER_WIDTH + CONST.STEP,
                 y + CONST.PLAYER_HEIGHT
-            ).blocked
+            )
         ) {
             this.player.x += CONST.STEP;
         }
         if (
             this.direction === CONST.MOVE_UP &&
             y > 0 &&
-            !this.positionLookup.getPositionInfo(x, y - CONST.STEP).blocked &&
-            !this.positionLookup.getPositionInfo(
+            !this.positionLookup.isPositionBlocked(x, y - CONST.STEP) &&
+            !this.positionLookup.isPositionBlocked(
                 x + CONST.PLAYER_WIDTH,
                 y - CONST.STEP
-            ).blocked
+            )
         ) {
             this.player.y -= CONST.STEP;
         }
         if (
             this.direction === CONST.MOVE_DOWN &&
             y < CONST.GAME_HEIGHT - CONST.PLAYER_HEIGHT &&
-            !this.positionLookup.getPositionInfo(
+            !this.positionLookup.isPositionBlocked(
                 x,
                 y + CONST.STEP + CONST.PLAYER_HEIGHT
-            ).blocked &&
-            !this.positionLookup.getPositionInfo(
+            ) &&
+            !this.positionLookup.isPositionBlocked(
                 x + CONST.PLAYER_WIDTH,
                 y + CONST.STEP + CONST.PLAYER_HEIGHT
-            ).blocked
+            )
         ) {
             this.player.y += CONST.STEP;
         }

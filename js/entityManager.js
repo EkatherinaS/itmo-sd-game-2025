@@ -140,8 +140,16 @@ export class EntityManager {
         return this.inventory;
     }
 
+    getInventoryItems() {
+        return this.inventory.getItems();
+    }
+
     getExperience() {
         return this.experience;
+    }
+
+    getExperienceItems() {
+        return this.experience.getItems();
     }
 
     isEndGame() {

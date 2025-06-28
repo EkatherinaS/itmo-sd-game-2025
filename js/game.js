@@ -95,6 +95,9 @@ export class Game {
         }
 
         this.renderer.renderEntities(entities);
-        this.renderer.renderInfo(inventory.getItems(), experience.getItems());
+        this.renderer.renderInfo(
+            this.entityManager.getInventoryItems(),
+            this.entityManager.getExperienceItems()
+        );
     }
 }

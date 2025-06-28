@@ -13,6 +13,10 @@ export class PositionLookup {
         else return this.positions.get(pos);
     }
 
+    isPositionBlocked(x, y) {
+        return this.getPositionInfo(x, y).blocked;
+    }
+
     checkCollide(entity1, entity2) {
         return (
             (entity1.x <= entity2.x + entity2.width &&
