@@ -59,7 +59,7 @@ export class EntityManager {
 
     moveAll() {
         this.enemies.forEach(enemy => {
-            enemy.update(this.positionLookup, this.player);
+            enemy.move(this.positionLookup, this.player);
         });
     }
 

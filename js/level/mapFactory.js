@@ -16,8 +16,8 @@ export class MapFactory {
         return this.factories.json.createMap(filePath);
     }
 
-    createRandom(difficulty = 1) {
-        return this.factories.random.createMap(difficulty);
+    createRandom(difficulty = 1, playerLevel = 1) {
+        return this.factories.random.createMap(difficulty, playerLevel);
     }
 
     createTest() {

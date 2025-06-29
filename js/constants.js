@@ -20,8 +20,6 @@ export const BLOCK_HEIGHT = 8;
 
 export const STEP = 1;
 
-//TODO: align to difficulty or do smth with it to make the game playable
-
 export const ENEMY_HP_SCALE = 1.2;
 export const ENEMY_POWER_SCALE = 1.2;
 export const ENEMY_ARMOR_SCALE = 1.2;
@@ -212,3 +210,13 @@ export const ENTITY_CLASS_SLUG = 'Slug';
 export const ENTITY_CLASS_MUSHROOM_GREEN = 'MushroomGreen';
 export const ENTITY_CLASS_MUSHROOM_BLUE = 'MushroomBlue';
 export const ENTITY_CLASS_MUSHROOM_PURPLE = 'MushroomPurple';
+
+export const ENTITY_TYPE_BLOCK = 'block';
+export const ENTITY_TYPE_ENTRY = 'entry';
+export const ENTITY_TYPE_EXIT = 'exit';
+export const ENTITY_TYPE_ORB = 'orb';
+export const ENTITY_TYPE_LEECH = 'leech';
+export const ENTITY_TYPE_SLUG = 'slug';
+export const ENTITY_TYPE_MUSHROOM_GREEN = 'mushroom_green';
+export const ENTITY_TYPE_MUSHROOM_BLUE = 'mushroom_blue';
+export const ENTITY_TYPE_MUSHROOM_PURPLE = 'mushroom_purple';

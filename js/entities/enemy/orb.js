@@ -3,7 +3,19 @@ import { BehaviourAggressive } from './behaviourAggressive.js';
 import * as CONST from '../../constants.js';
 
 export class Orb extends BaseEnemy {
-    constructor(x, y, playerLvl) {
+    constructor(x, y, playerOrLevel) {
+        let playerLvl, player;
+        if (
+            typeof playerOrLevel === 'object' &&
+            playerOrLevel.lvl !== undefined
+        ) {
+            player = playerOrLevel;
+            playerLvl = player.lvl;
+        } else {
+            playerLvl = playerOrLevel;
+            player = null;
+        }
+
         const sprite = CONST.ENEMY_SPRITES['orb'][0];
         super(
             sprite,
@@ -15,6 +27,7 @@ export class Orb extends BaseEnemy {
         );
         this.strategy = new BehaviourAggressive();
         this.frameCount = 6;
+        this.player = player;
         this.playerLvl = playerLvl;
     }
 
@@ -23,7 +36,7 @@ export class Orb extends BaseEnemy {
     }
 
     clone() {
-        const cloned = new Orb(this.x, this.y, this.playerLvl);
+        const cloned = new Orb(this.x, this.y, this.player || this.playerLvl);
         cloned.hp = this.hp;
         cloned.power = this.power;
         cloned.armor = this.armor;

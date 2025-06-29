@@ -23,11 +23,7 @@ export class BaseEnemy extends Enemy {
         return true;
     }
 
-    update(positionLookup, player) {
-        this.#move(positionLookup, player);
-    }
-
-    #move(positionLookup, player) {
+    move(positionLookup, player) {
         const speed = this.state.getMoveSpeed();
         const dir = this.strategy.getMoveDirection(this, player);
 

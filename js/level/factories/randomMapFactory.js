@@ -33,10 +33,10 @@ export class RandomMapFactory extends AbstractMapFactory {
         return new ExitPoint(x, y, width, height);
     }
 
-    createMap(difficulty = 1) {
+    createMap(difficulty = 1, playerLevel = 1) {
         return this.mapBuilder
             .setDifficulty(difficulty)
-            .setPlayerLevel(1)
+            .setPlayerLevel(playerLevel)
             .addEntryRandom()
             .addExitRandom()
             .addBlocks()
