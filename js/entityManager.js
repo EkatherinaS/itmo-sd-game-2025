@@ -65,7 +65,7 @@ export class EntityManager {
 
     checkCollide() {
         this.enemies.forEach(enemy => {
-            const hit = enemy.fight(this.player, this.positionLookup);
+            const hit = this.player.fight(enemy, this.positionLookup);
             if (hit) this.experience.updateHp();
         });
 
@@ -111,5 +111,9 @@ export class EntityManager {
 
     isExitCollide() {
         return this.positionLookup.checkCollide(this.player, this.exit);
+    }
+
+    getPlayerLevel() {
+        return this.player.lvl;
     }
 }

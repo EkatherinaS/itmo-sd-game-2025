@@ -35,7 +35,7 @@ export class Game {
             CONST.LEVEL_TYPES_RANDOM,
             null,
             CONST.GAME_DIFFICULTY,
-            this.entityManager.getPlayer().lvl
+            this.entityManager.getPlayerLevel()
         );
 
         await this.level.init();
