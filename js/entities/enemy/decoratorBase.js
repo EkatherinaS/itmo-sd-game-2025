@@ -2,7 +2,14 @@ import { Enemy } from './enemy.js';
 
 export class DecoratorBase extends Enemy {
     constructor(enemy) {
-        super(enemy.sprite, enemy.x, enemy.y, enemy.hp, enemy.power, enemy.armor);
+        super(
+            enemy.sprite,
+            enemy.x,
+            enemy.y,
+            enemy.hp,
+            enemy.power,
+            enemy.armor
+        );
         this.enemy = enemy;
     }
 
@@ -14,7 +21,7 @@ export class DecoratorBase extends Enemy {
         this.enemy.move(positionLookup, player);
     }
 
-    changeToNormalState() { }
+    changeToNormalState() {}
 
     getEnemy() {
         return this.enemy;

@@ -31,7 +31,7 @@ export class Player extends Actor {
         }
         if (
             Math.abs(enemy.x - (this.x + this.width / 2)) ** 2 +
-            Math.abs(enemy.y - (this.y + this.height / 2)) ** 2 <
+                Math.abs(enemy.y - (this.y + this.height / 2)) ** 2 <
             this.armor ** 2
         ) {
             enemy = this.light.useEffect(enemy);

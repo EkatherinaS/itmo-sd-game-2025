@@ -13,7 +13,7 @@ export class PurpleLight extends Light {
     }
 
     useEffect(enemy) {
-        console.log("PURPLE");
+        console.log('PURPLE');
         return new DecoratorConfusion(enemy);
     }
 }
