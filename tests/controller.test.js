@@ -59,7 +59,6 @@ test('TestLeft', () => {
 test('TestBlock', () => {
     player.x = blockPos.x - CONST.STEP - CONST.PLAYER_WIDTH;
     player.y = blockPos.y;
-    console.log(positionLookup.getPositionInfo(blockPos.x, blockPos.y));
     const cmd = commandFactory.createCmdMoveRight();
     cmd.invoke();
     assert.strictEqual(player.y, blockPos.y);

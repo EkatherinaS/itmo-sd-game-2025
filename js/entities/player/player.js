@@ -35,7 +35,6 @@ export class Player extends Actor {
             this.armor ** 2
         ) {
             enemy = this.light.useEffect(enemy);
-            console.log(enemy);
             enemy.fight(this.power + this.light.power);
             return true;
         }
