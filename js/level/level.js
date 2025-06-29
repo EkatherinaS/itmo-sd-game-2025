@@ -8,11 +8,12 @@ export class Level {
     static create(
         mapType = CONST.LEVEL_TYPES_TEST,
         filePath = null,
-        difficulty = 1
+        difficulty = 1,
+        playerLevel = 1
     ) {
         switch (mapType) {
             case CONST.LEVEL_TYPES_RANDOM:
-                return new LevelRandom(difficulty);
+                return new LevelRandom(difficulty, playerLevel);
             case CONST.LEVEL_TYPES_FROM_JSON:
                 return new LevelFromJSON(filePath);
             case CONST.LEVEL_TYPES_TEST:

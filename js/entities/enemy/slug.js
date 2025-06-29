@@ -3,7 +3,20 @@ import { BehaviourCowardy } from './behaviourCowardy.js';
 import * as CONST from '../../constants.js';
 
 export class Slug extends BaseEnemy {
-    constructor(x, y, playerLvl) {
+    constructor(x, y, playerOrLevel) {
+        let playerLvl, player;
+
+        if (
+            typeof playerOrLevel === 'object' &&
+            playerOrLevel.lvl !== undefined
+        ) {
+            player = playerOrLevel;
+            playerLvl = player.lvl;
+        } else {
+            playerLvl = playerOrLevel;
+            player = null;
+        }
+
         const sprite = CONST.ENEMY_SPRITES['slug'][0];
         super(
             sprite,
@@ -15,6 +28,7 @@ export class Slug extends BaseEnemy {
         );
         this.strategy = new BehaviourCowardy();
         this.frameCount = 8;
+        this.player = player;
         this.playerLvl = playerLvl;
     }
 
@@ -22,7 +36,18 @@ export class Slug extends BaseEnemy {
         this.sprite = CONST.ENEMY_SPRITES['slug'][this.getNextFrame()];
     }
 
-    clone(x, y, playerLvl) {
-        return new Slug(x, y, playerLvl);
+    clone() {
+        const cloned = new Slug(this.x, this.y, this.player || this.playerLvl);
+        cloned.hp = this.hp;
+        cloned.power = this.power;
+        cloned.armor = this.armor;
+        cloned.baseHp = this.baseHp;
+        cloned.basePower = this.basePower;
+        cloned.baseArmor = this.baseArmor;
+        cloned.slowCount = this.slowCount;
+        cloned.frame = this.frame;
+        cloned.frameCount = this.frameCount;
+        cloned.count = this.count;
+        return cloned;
     }
 }

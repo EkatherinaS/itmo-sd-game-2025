@@ -20,7 +20,7 @@ export class CmdUse extends Command {
                     this.player.setBlueLight();
                 break;
             case CONST.PURPLE_MUSHROOM:
-                if (this.inventory.useYellowMushroom())
+                if (this.inventory.usePurpleMushroom())
                     this.player.setPurpleight();
                 break;
             default:

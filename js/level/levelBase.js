@@ -50,7 +50,7 @@ export class LevelBase {
 
     getBlocks() {
         return this.entities.filter(
-            entity => entity.constructor.name === 'Block'
+            entity => entity.constructor.name === CONST.ENTITY_CLASS_BLOCK
         );
     }
 
@@ -58,7 +58,17 @@ export class LevelBase {
         return this.entities.find(entity => entity.isEntry);
     }
 
+    getEntryCoords() {
+        const entry = this.getEntry();
+        return entry ? { x: entry.x, y: entry.y } : null;
+    }
+
     getExit() {
         return this.entities.find(entity => entity.isExit);
+    }
+
+    getExitCoords() {
+        const exit = this.getExit();
+        return exit ? { x: exit.x, y: exit.y } : null;
     }
 }

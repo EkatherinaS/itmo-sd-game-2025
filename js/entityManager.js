@@ -1,23 +1,13 @@
-import { Leech } from './entities/enemy/leech.js';
-import { Orb } from './entities/enemy/orb.js';
-import { Slug } from './entities/enemy/slug.js';
-import { MushroomGreen } from './entities/bonus/mushroomGreen.js';
-import { MushroomBlue } from './entities/bonus/mushroomBlue.js';
-import { MushroomPurple } from './entities/bonus/mushroomPurple.js';
 import { Player } from './entities/player/player.js';
 import { Inventory } from './info/inventory.js';
 import { Experience } from './info/experience.js';
+import * as CONST from './constants.js';
 
 export class EntityManager {
     constructor() {
         this.player = new Player();
         this.inventory = new Inventory();
         this.experience = new Experience(this.player);
-        this.enemySamples = {
-            orb: new Orb(0, 0, this.player.lvl),
-            slug: new Slug(0, 0, this.player.lvl),
-            leech: new Leech(0, 0, this.player.lvl),
-        };
         this.bonuses = [];
         this.enemies = [];
         this.isExitOpen = false;
@@ -27,6 +17,10 @@ export class EntityManager {
         return this.player;
     }
 
+    setPlayerCoords(x, y) {
+        this.player.setCoords(x, y);
+    }
+
     getMovableEntities() {
         return this.player
             .getEntities()
@@ -34,98 +28,44 @@ export class EntityManager {
             .concat(this.bonuses);
     }
 
-    #setEntities(map) {
-        // Добавляем врагов и бонусы из карты
-        if (map.entities) {
-            map.entities.forEach(entity => {
-                if (
-                    entity instanceof Orb ||
-                    entity instanceof Slug ||
-                    entity instanceof Leech
-                ) {
-                    this.enemies.push(entity);
-                } else if (
-                    entity instanceof MushroomGreen ||
-                    entity instanceof MushroomBlue ||
-                    entity instanceof MushroomPurple
-                ) {
-                    this.bonuses.push(entity);
-                }
-            });
-        }
-
-        // Обрабатываем врагов из старых уровней (как Position) - используем clone()
-        if (map.enemies) {
-            map.enemies.forEach(enemy => {
-                switch (Math.floor(Math.random() * 3)) {
-                    case 0:
-                        this.enemies.push(
-                            this.enemySamples.orb.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
-                        break;
-                    case 1:
-                        this.enemies.push(
-                            this.enemySamples.slug.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
-                        break;
-                    default:
-                        this.enemies.push(
-                            this.enemySamples.leech.clone(
-                                enemy.x,
-                                enemy.y,
-                                this.player.lvl
-                            )
-                        );
-                }
-            });
-        }
-
-        // Обрабатываем бонусы из старых уровней
-        if (map.bonuses) {
-            map.bonuses.forEach(bonus => {
-                switch (Math.floor(Math.random() * 3)) {
-                    case 0:
-                        this.bonuses.push(new MushroomGreen(bonus.x, bonus.y));
-                        break;
-                    case 1:
-                        this.bonuses.push(new MushroomBlue(bonus.x, bonus.y));
-                        break;
-                    default:
-                        this.bonuses.push(new MushroomPurple(bonus.x, bonus.y));
-                }
-            });
-        }
-    }
-
     setLevelInfo(level) {
         this.positionLookup = level.getPositionLookup();
         this.exit = level.getExit();
-        // Обновляем образцы врагов с текущим уровнем игрока
-        this.enemySamples = {
-            orb: new Orb(0, 0, this.player.lvl),
-            slug: new Slug(0, 0, this.player.lvl),
-            leech: new Leech(0, 0, this.player.lvl),
-        };
-        this.#setEntities(level);
+
+        this.enemies = [];
+        this.bonuses = [];
+
+        if (level.entities) {
+            this.enemies = level.entities.filter(entity => {
+                return (
+                    entity.constructor.name === CONST.ENTITY_CLASS_ORB ||
+                    entity.constructor.name === CONST.ENTITY_CLASS_SLUG ||
+                    entity.constructor.name === CONST.ENTITY_CLASS_LEECH
+                );
+            });
+
+            this.bonuses = level.entities.filter(entity => {
+                return (
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_GREEN ||
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_BLUE ||
+                    entity.constructor.name ===
+                        CONST.ENTITY_CLASS_MUSHROOM_PURPLE
+                );
+            });
+        }
     }
 
     moveAll() {
         this.enemies.forEach(enemy => {
-            enemy.update(this.positionLookup, this.player);
+            enemy.move(this.positionLookup, this.player);
         });
     }
 
     checkCollide() {
         this.enemies.forEach(enemy => {
-            const hit = enemy.fight(this.player, this.positionLookup);
+            const hit = this.player.fight(enemy, this.positionLookup);
             if (hit) this.experience.updateHp();
         });
 
@@ -149,8 +89,16 @@ export class EntityManager {
         return this.inventory;
     }
 
+    getInventoryItems() {
+        return this.inventory.getItems();
+    }
+
     getExperience() {
         return this.experience;
+    }
+
+    getExperienceItems() {
+        return this.experience.getItems();
     }
 
     isEndGame() {
@@ -163,5 +111,9 @@ export class EntityManager {
 
     isExitCollide() {
         return this.positionLookup.checkCollide(this.player, this.exit);
+    }
+
+    getPlayerLevel() {
+        return this.player.lvl;
     }
 }

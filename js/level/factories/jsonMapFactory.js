@@ -58,7 +58,7 @@ export class JSONMapFactory extends AbstractMapFactory {
             let entity;
 
             switch (entityData.type) {
-                case 'block':
+                case CONST.ENTITY_TYPE_BLOCK:
                     entity = this.createBlock(
                         entityData.x,
                         entityData.y,
@@ -67,7 +67,7 @@ export class JSONMapFactory extends AbstractMapFactory {
                     );
                     break;
 
-                case 'entry':
+                case CONST.ENTITY_TYPE_ENTRY:
                     entity = this.createEntryPoint(
                         entityData.x,
                         entityData.y,
@@ -76,7 +76,7 @@ export class JSONMapFactory extends AbstractMapFactory {
                     );
                     break;
 
-                case 'exit':
+                case CONST.ENTITY_TYPE_EXIT:
                     entity = this.createExitPoint(
                         entityData.x,
                         entityData.y,

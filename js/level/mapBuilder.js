@@ -50,12 +50,20 @@ export class MapBuilder {
 
     setPlayerLevel(playerLevel) {
         this.playerLevel = playerLevel;
-        // Обновляем образцы врагов с новым уровнем
+        this.updateEnemySamples();
+        return this;
+    }
+
+    updateEnemySamples() {
         this.enemySamples = {
             orb: new Orb(0, 0, this.playerLevel),
             slug: new Slug(0, 0, this.playerLevel),
             leech: new Leech(0, 0, this.playerLevel),
         };
+    }
+
+    setPlayer(player) {
+        this.player = player;
         return this;
     }
 
@@ -177,38 +185,34 @@ export class MapBuilder {
                 Math.random() * (this.height - CONST.ENEMY_HEIGHT)
             );
 
-            const enemyTypes = ['leech', 'orb', 'slug'];
+            const enemyTypes = [
+                CONST.ENTITY_TYPE_LEECH,
+                CONST.ENTITY_TYPE_ORB,
+                CONST.ENTITY_TYPE_SLUG,
+            ];
             const enemyType =
                 enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
 
             switch (enemyType) {
-                case 'leech':
-                    newEnemy = this.enemySamples.leech.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                case CONST.ENTITY_TYPE_LEECH:
+                    newEnemy = this.enemySamples.leech.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
-                case 'orb':
-                    newEnemy = this.enemySamples.orb.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                case CONST.ENTITY_TYPE_ORB:
+                    newEnemy = this.enemySamples.orb.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
-                case 'slug':
-                    newEnemy = this.enemySamples.slug.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                case CONST.ENTITY_TYPE_SLUG:
+                    newEnemy = this.enemySamples.slug.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
                     break;
                 default:
-                    newEnemy = this.enemySamples.leech.clone(
-                        x,
-                        y,
-                        this.playerLevel
-                    );
+                    newEnemy = this.enemySamples.leech.clone();
+                    newEnemy.x = x;
+                    newEnemy.y = y;
             }
 
             hasCollision = this.#checkCollision(
@@ -305,7 +309,7 @@ export class MapBuilder {
 
     #checkBlockCollision(entity) {
         for (const existingEntity of this.entities) {
-            if (existingEntity.constructor.name === 'Block') {
+            if (existingEntity.constructor.name === CONST.ENTITY_CLASS_BLOCK) {
                 const xCollision =
                     entity.x < existingEntity.x + existingEntity.width &&
                     entity.x + entity.width > existingEntity.x;

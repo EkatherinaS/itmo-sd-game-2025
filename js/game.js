@@ -10,13 +10,8 @@ export class Game {
         const ctxInfo = info.getContext('2d');
 
         this.loop = this.loop.bind(this);
-        this.level = Level.create(
-            CONST.LEVEL_TYPES_RANDOM,
-            null,
-            CONST.GAME_DIFFICULTY
-        );
-
         this.entityManager = new EntityManager();
+
         this.renderer = new Renderer(ctx, ctxInfo);
         this.controller = new Controller();
 
@@ -36,6 +31,13 @@ export class Game {
     }
 
     async initLevel() {
+        this.level = Level.create(
+            CONST.LEVEL_TYPES_RANDOM,
+            null,
+            CONST.GAME_DIFFICULTY,
+            this.entityManager.getPlayerLevel()
+        );
+
         await this.level.init();
 
         this.entityManager.setLevelInfo(this.level);
@@ -52,7 +54,7 @@ export class Game {
             ? entry.y
             : Math.floor(CONST.GAME_HEIGHT / CONST.STEP / 2) * CONST.STEP;
 
-        this.entityManager.getPlayer().setCoords(spawnX, spawnY);
+        this.entityManager.setPlayerCoords(spawnX, spawnY);
     }
 
     async runLevel() {
@@ -95,6 +97,9 @@ export class Game {
         }
 
         this.renderer.renderEntities(entities);
-        this.renderer.renderInfo(inventory.getItems(), experience.getItems());
+        this.renderer.renderInfo(
+            this.entityManager.getInventoryItems(),
+            this.entityManager.getExperienceItems()
+        );
     }
 }
