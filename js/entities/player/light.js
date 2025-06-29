@@ -16,4 +16,8 @@ export class Light extends Entity {
         this.x = x - this.width / 2;
         this.y = y - this.height / 2;
     }
+
+    useEffect(enemy) {
+        return enemy;
+    }
 }

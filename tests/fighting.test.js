@@ -41,9 +41,9 @@ describe('Fighting Test Suit', () => {
     });
 
     it('should take dmg', () => {
-        mockPlayer.fight.mock.mockImplementation(() => 10);
-        enemy.fight(mockPlayer, mockPositionLookup);
-        assert.strictEqual(enemy.hp, hp - 10);
+        const damage = 10;
+        enemy.fight(damage);
+        assert.strictEqual(enemy.hp, hp - damage);
     });
 
     it('should panic', () => {
