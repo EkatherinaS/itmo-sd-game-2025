@@ -119,13 +119,13 @@ export class EntityManager {
 
     moveAll() {
         this.enemies.forEach(enemy => {
-            enemy.update(this.positionLookup, this.player);
+            enemy.move(this.positionLookup, this.player);
         });
     }
 
     checkCollide() {
         this.enemies.forEach(enemy => {
-            const hit = enemy.fight(this.player, this.positionLookup);
+            const hit = this.player.fight(enemy, this.positionLookup);
             if (hit) this.experience.updateHp();
         });
 

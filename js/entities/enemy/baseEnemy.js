@@ -14,23 +14,19 @@ export class BaseEnemy extends Enemy {
         this.baseArmor = armor;
     }
 
-    fight(player, positionLookup) {
-        const hit = player.fight(this, positionLookup);
-        if (hit == 0) return false;
-
-        this.hp -= hit;
+    fight(playerPower) {
+        this.hp -= playerPower;
         this.state = new StatePanic(this);
-        return true;
     }
 
-    update(positionLookup, player) {
-        this.#move(positionLookup, player);
-    }
-
-    #move(positionLookup, player) {
+    move(positionLookup, player) {
         const speed = this.state.getMoveSpeed();
         const dir = this.strategy.getMoveDirection(this, player);
+        this._moveWithCheckPosition(positionLookup, dir, speed);
+        this.setNextSprite();
+    }
 
+    _moveWithCheckPosition(positionLookup, dir, speed) {
         const nextX = this.x + dir.x * speed;
         const nextY = this.y + dir.y * speed;
 
@@ -67,8 +63,6 @@ export class BaseEnemy extends Enemy {
 
         if (wallX) this.strategy.reverseX();
         if (wallY) this.strategy.reverseY();
-
-        this.setNextSprite();
     }
 
     changeToNormalState() {

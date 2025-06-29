@@ -31,12 +31,15 @@ export class Player extends Actor {
         }
         if (
             Math.abs(enemy.x - (this.x + this.width / 2)) ** 2 +
-                Math.abs(enemy.y - (this.y + this.height / 2)) ** 2 <
+            Math.abs(enemy.y - (this.y + this.height / 2)) ** 2 <
             this.armor ** 2
         ) {
-            return this.power + this.light.power;
+            enemy = this.light.useEffect(enemy);
+            console.log(enemy);
+            enemy.fight(this.power + this.light.power);
+            return true;
         }
-        return 0;
+        return collide;
     }
 
     updateLight() {
