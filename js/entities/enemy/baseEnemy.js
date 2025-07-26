@@ -1,0 +1,75 @@
+import * as CONST from '../../constants.js';
+import { Enemy } from './enemy.js';
+import { StateNormal } from './stateNormal.js';
+import { StatePanic } from './statePanic.js';
+
+export class BaseEnemy extends Enemy {
+    constructor(sprite, x, y, hp, power, armor) {
+        super(sprite, x, y, hp, power, armor);
+        this.stateNormal = new StateNormal(this);
+        this.state = this.stateNormal;
+        this.slowCount = 4;
+        this.baseHp = hp;
+        this.basePower = power;
+        this.baseArmor = armor;
+    }
+
+    fight(playerPower) {
+        this.hp -= playerPower;
+        this.state = new StatePanic(this);
+    }
+
+    move(positionLookup, player) {
+        const speed = this.state.getMoveSpeed();
+        const dir = this.strategy.getMoveDirection(this, player);
+        this._moveWithCheckPosition(positionLookup, dir, speed);
+        this.setNextSprite();
+    }
+
+    _moveWithCheckPosition(positionLookup, dir, speed) {
+        const nextX = this.x + dir.x * speed;
+        const nextY = this.y + dir.y * speed;
+
+        const width = CONST.ENEMY_WIDTH;
+        const height = CONST.ENEMY_HEIGHT;
+
+        const checkX = Math.round(this.x);
+        const checkY = Math.round(this.y);
+        const checkNewX = Math.round(nextX);
+        const checkNewY = Math.round(nextY);
+
+        const blockedX =
+            positionLookup.isPositionBlocked(checkNewX, checkY) ||
+            positionLookup.isPositionBlocked(checkNewX + width, checkY) ||
+            positionLookup.isPositionBlocked(checkNewX, checkY + height) ||
+            positionLookup.isPositionBlocked(
+                checkNewX + width,
+                checkY + height
+            );
+
+        const blockedY =
+            positionLookup.isPositionBlocked(checkX, checkNewY) ||
+            positionLookup.isPositionBlocked(checkX + width, checkNewY) ||
+            positionLookup.isPositionBlocked(checkX, checkNewY + height) ||
+            positionLookup.isPositionBlocked(
+                checkX + width,
+                checkNewY + height
+            );
+
+        const wallX = nextX < 0 || nextX > CONST.GAME_WIDTH - CONST.ENEMY_WIDTH;
+        const wallY =
+            nextY < 0 || nextY > CONST.GAME_HEIGHT - CONST.ENEMY_HEIGHT;
+
+        if (!blockedX && !wallX) this.x = nextX;
+        if (!blockedY && !wallY) this.y = nextY;
+
+        if (wallX) this.strategy.reverseX();
+        if (wallY) this.strategy.reverseY();
+    }
+
+    changeToNormalState() {
+        this.state = this.stateNormal;
+    }
+
+    //clone()
+}

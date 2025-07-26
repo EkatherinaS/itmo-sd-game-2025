@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <title>Lumen</title>
+    </head>
+
+    <body>
+        <div id="audio">
+            <audio
+                id="audioPlayer"
+                src="music/Lumen_-_Goret_piano_instrumental_(SkySound.cc).mp3"
+                autoplay="autoplay"
+                loop="loop"
+            ></audio>
+            <!--<audio id="collision" src="images/collision.mp3"></audio>
+        <audio id="lose" src="images/lose.mp3"></audio>
+        <audio id="coin" src="images/coin.mp3"></audio>-->
+        </div>
+        <div id="content">
+            <img id="bar-left" src="images/leftbar.svg" />
+            <div id="layout">
+                <div id="game">
+                    <canvas id="gameCanvas"></canvas>
+                    <button id="startButton">Start Game</button>
+                </div>
+                <div id="info">
+                    <canvas id="infoCanvas"></canvas>
+                </div>
+            </div>
+            <img id="bar-right" src="images/rightbar.svg" />
+        </div>
+        <script type="module" src="js/layout.js"></script>
+    </body>
+</html>
